@@ -13,7 +13,7 @@ public class NYTApi {
   private static final String BASE_URL = "http://api.nytimes.com/svc/";
 
   private static final String TOPSTORIES_URL = BASE_URL + "topstories/v1/";
-  private static final String FORMAT = "json";
+  private static final String FORMAT = ".json";
 
   private static NYTApi INSTANCE = null;
 
@@ -33,8 +33,6 @@ public class NYTApi {
     if (!Arrays.asList(Section.getSections()).contains(section)) {
       throw new IllegalArgumentException("The section passed was not a valid section");
     }
-
-    // begin query params
 
     return TOPSTORIES_URL + section + FORMAT + "?api-key=" + API_KEY;
   }
