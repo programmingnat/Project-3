@@ -26,19 +26,18 @@ public class Section {
   public static final String REALESTATE = "realestate";
 
   private static String[] SECTIONS = {
-      HOME, WORLD, NATIONAL, POLITICS, NYREGION, BUSINESS, OPINION, TECHNOLOGY, SCIENCE, HEALTH, SPORTS, ARTS, FASHION, DINING, TRAVEL, MAGAZINE, REALESTATE,
+      HOME,    WORLD,      NATIONAL, POLITICS, NYREGION,   BUSINESS,
+      OPINION, TECHNOLOGY, SCIENCE,  HEALTH,   SPORTS,     ARTS,
+      FASHION, DINING,     TRAVEL,   MAGAZINE, REALESTATE,
   };
 
   /**
    *
    * @return The sections provided by the NYT api
    */
-  public static String[] getSections() {
-    return SECTIONS;
-  }
+  public static String[] getSections() { return SECTIONS; }
 
-  private Section(){
-    throw  new AssertionError("This is should not be instantiated");
+  private Section() {
+    throw new AssertionError("This is should not be instantiated");
   }
-
 }

@@ -9,19 +9,11 @@ public class ApiErrorResponse {
   private double code;
   private String message;
 
-  public double getCode() {
-    return code;
-  }
+  public double getCode() { return code; }
 
-  public void setCode(double code) {
-    this.code = code;
-  }
+  public void setCode(double code) { this.code = code; }
 
-  public String getMessage() {
-    return message;
-  }
+  public String getMessage() { return message; }
 
-  public void setMessage(String message) {
-    this.message = message;
-  }
+  public void setMessage(String message) { this.message = message; }
 }
