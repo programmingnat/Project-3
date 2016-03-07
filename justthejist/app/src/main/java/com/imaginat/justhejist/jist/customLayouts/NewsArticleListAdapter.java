@@ -1,11 +1,15 @@
 package com.imaginat.justhejist.jist.customLayouts;
 
+import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.imaginat.justhejist.jist.R;
 
@@ -14,6 +18,7 @@ import com.imaginat.justhejist.jist.R;
  */
 public class NewsArticleListAdapter extends RecyclerView.Adapter<NewsArticleListAdapter.ViewHolder> {
     private String[] mDataset;
+    private static Context mContext;
 
 //    Picasso.with(MainActivity.this).load(fullResource).error(R.drawable.android_placeholder)
 //    .placeholder(R.drawable.android_placeholder)
@@ -27,13 +32,22 @@ public class NewsArticleListAdapter extends RecyclerView.Adapter<NewsArticleList
         public TextView mTextView;
         public ViewHolder(View v) {
             super(v);
-            mTextView = (TextView)v.findViewById(R.id.news_article_item_text);
+            CardView cardView = (CardView)v.findViewById(R.id.card_view);
+            mTextView = (TextView)cardView.findViewById(R.id.news_article_item_text);
+            ImageView imgView = (ImageView)cardView.findViewById(R.id.theMainImage);
+//            Picasso
+//                    .with(mContext)
+//                    .load(R.drawable.ted_cruz2_nyt)
+//                    .fit()
+//                      //.centerInside()      // call .centerInside() or .centerCrop() to avoid a stretched image
+//                    .into(imgView);
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public NewsArticleListAdapter(String[] myDataset) {
+    public NewsArticleListAdapter(String[] myDataset,Context context) {
         mDataset = myDataset;
+        mContext=context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -45,7 +59,12 @@ public class NewsArticleListAdapter extends RecyclerView.Adapter<NewsArticleList
        View v = LayoutInflater.from(parent.getContext())
          .inflate(R.layout.my_text_view, parent, false);
         // set the view's size, margins, paddings and layout parameters
-
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"CLICKED NEWS ARTICLE ITEM",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         ViewHolder vh = new ViewHolder(v);
         return vh;

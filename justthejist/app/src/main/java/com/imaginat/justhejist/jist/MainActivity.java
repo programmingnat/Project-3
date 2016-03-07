@@ -1,6 +1,5 @@
 package com.imaginat.justhejist.jist;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,9 +13,6 @@ import android.view.View;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.LikeView;
-import com.facebook.share.widget.ShareButton;
 import com.imaginat.justhejist.jist.customLayouts.NewsArticleListAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //        // specify an adapter (see also next example)
         String[] myDataset = new String[]{"test1","test2","test3","test4","test5"};
-        mAdapter = new NewsArticleListAdapter(myDataset);
+        mAdapter = new NewsArticleListAdapter(myDataset,this);
         mRecyclerView.setAdapter(mAdapter);
 
         //------------------------------------------------------------------------------
@@ -60,18 +56,18 @@ public class MainActivity extends AppCompatActivity {
 
 
         //------------------------FACEBOOK BUTTONS---------------------------------------------
-        ShareLinkContent content = new ShareLinkContent.Builder()
-                .setContentUrl(Uri.parse("http://www.starwars.com/"))
-                .build();
-
-        final ShareButton postLinkButton = (ShareButton)findViewById(R.id.fb_share_button);
-        postLinkButton.setShareContent(content);
-
-
-        LikeView likeView = (LikeView) findViewById(R.id.testFacebookLikeButton);
-        likeView.setObjectIdAndType(
-                "http://www.starwars.com/",
-                LikeView.ObjectType.PAGE);
+//        ShareLinkContent content = new ShareLinkContent.Builder()
+//                .setContentUrl(Uri.parse("http://www.starwars.com/"))
+//                .build();
+//
+//        final ShareButton postLinkButton = (ShareButton)findViewById(R.id.fb_share_button);
+//        postLinkButton.setShareContent(content);
+//
+//
+//        LikeView likeView = (LikeView) findViewById(R.id.testFacebookLikeButton);
+//        likeView.setObjectIdAndType(
+//                "http://www.starwars.com/",
+//                LikeView.ObjectType.PAGE);
         //----------------------------------------------------------------------------------------
 
     }
