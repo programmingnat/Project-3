@@ -53,6 +53,13 @@
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator"/>
         </service>
+        
+        <provider
+            android:authorities="com.imaginat.justhejist.jist.sync.StubProvider"
+            android:name="com.imaginat.justhejist.jist.sync.StubProvider"
+            android:label="my provider"
+            android:exported="false"
+            android:syncable="true" />
     </application>
 
 </manifest>
