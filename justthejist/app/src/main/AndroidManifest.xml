@@ -45,6 +45,14 @@
                 android:name="android.content.AbstractThreadedSyncAdapter"
                 android:resource="@xml/topstoriessyncadapter"/>
         </service>
+        <service android:name=".services.AuthenticatorService">
+            <intent-filter>
+                <action android:name="android.account.Authenticator"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator"/>
+        </service>
     </application>
 
 </manifest>

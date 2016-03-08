@@ -1,5 +1,9 @@
 package com.imaginat.justhejist.jist;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -40,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     CallbackManager callbackManager;
     AccessTokenTracker accessTokenTracker;
+    ContentResolver mResolver;
+
+    public static final String AUTHORITY = "com.imaginat.justhejist.jist.sync.StubProvider";
+    public static final String ACCOUNT_TYPE = "example.com";
+    public static final String ACCOUNT = "default_account";
+
+    Account mAccount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+        mAccount = createSyncAccount(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
         // use this setting to improve performance if you know that changes
@@ -70,8 +83,12 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Sync it up!!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+                bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+                ContentResolver.requestSync(mAccount, AUTHORITY, bundle);
             }
         });
 
@@ -203,5 +220,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         accessTokenTracker.stopTracking();
+    }
+
+    public static Account createSyncAccount(Context context) {
+        Account newAccount = new Account(ACCOUNT, ACCOUNT_TYPE);
+        AccountManager manager = (AccountManager)context.getSystemService(ACCOUNT_SERVICE);
+        if (manager.addAccountExplicitly(newAccount, null, null)) {
+
+        } else {
+
+        }
+        return newAccount;
     }
 }
