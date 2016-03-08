@@ -27,6 +27,8 @@ public class MaratNotifications {
         nameOfArticle = articleName;
         mUrl = url;
     }
+
+    //big picture notification for every time a breaking news article is synced
     public void createNotificationForNewArticle () {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mActivity);
         builder.setSmallIcon(android.R.drawable.ic_lock_idle_lock);
@@ -44,7 +46,7 @@ public class MaratNotifications {
 
     }
 
-    //turn the bitmap received through the
+    //turn the bitmap received into a url that is accepted in the big picture notification
     public static Bitmap getBitmapFromURL(String src) {
         try {
             URL url = new URL(src);

@@ -26,9 +26,12 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
     public static final String COL_KEYWORDS = "keywords";
     public static final String COL_MULTIMEDIA = "multimedia";
     public static final String COL_URL = "url";
-    public static final String [] All_COLUMNS = new String[] {COL_ID, COL_SECTION, COL_SUBSECTION, COL_ABSTRACT, COL_BYLINE, COL_UPDATE,
+    private static final String [] All_COLUMNS = new String[] {COL_ID, COL_SECTION, COL_SUBSECTION, COL_ABSTRACT, COL_BYLINE, COL_UPDATE,
     COL_CREATED, COL_TITLE, COL_PUBLISHED, COL_KEYWORDS, COL_MULTIMEDIA, COL_URL};
 
+    public static String[] getAllColumns() {
+        return All_COLUMNS;
+    }
 
     public static final String CREATE = "CREATE TABLE " + DATABASE_NAME
             + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -44,8 +47,19 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
             + COL_MULTIMEDIA + " TEXT, "
             + COL_URL + " TEXT)";
 
-    public TopStoryDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    private TopStoryDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+    //constructor in singleton should be private
+
+    private static TopStoryDBHelper Instance = null;
+
+    public static TopStoryDBHelper getInstance(Context context) {
+        if (Instance == null) {
+            Instance = new TopStoryDBHelper(context);
+        }
+
+        return Instance;
     }
 
     @Override
@@ -59,14 +73,14 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long addStock(ContentValues values){
+    public long addArticle(ContentValues values){
         SQLiteDatabase db = this.getWritableDatabase();
         long rowAdded = db.insert(TABLE_NAME, null, values);
         db.close();
         return rowAdded;
     }
 
-    public Cursor getAllStocks() {
+    public Cursor getAllArticles() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME,
                 All_COLUMNS,
@@ -80,7 +94,7 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Cursor getStockById(String id){
+    public Cursor getArticlesById(String id){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME,
                 All_COLUMNS,
@@ -94,7 +108,7 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public int updateStockById(String id, ContentValues values) {
+    public int updateArticlesById(String id, ContentValues values) {
         SQLiteDatabase db = this.getWritableDatabase();
         int rowsChanged = db.update(TABLE_NAME,
                 values,
