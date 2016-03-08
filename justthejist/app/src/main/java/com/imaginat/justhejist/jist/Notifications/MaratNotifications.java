@@ -44,6 +44,7 @@ public class MaratNotifications {
 
     }
 
+    //turn the bitmap received through the
     public static Bitmap getBitmapFromURL(String src) {
         try {
             URL url = new URL(src);
