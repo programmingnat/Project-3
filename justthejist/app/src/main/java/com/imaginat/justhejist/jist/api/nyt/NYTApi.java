@@ -9,9 +9,9 @@ import java.util.Arrays;
  */
 public class NYTApi {
 
-  private static final String API_KEY =
+  /*package*/ static final String API_KEY =
       "56fdb568f4650663376b28f5493fa58d:5:71410972";
-  private static final String BASE_URL = "http://api.nytimes.com/svc/";
+  public static final String BASE_URL = "http://api.nytimes.com/svc/";
 
   private static final String TOPSTORIES_URL = BASE_URL + "topstories/v1/";
   private static final String FORMAT = ".json";
