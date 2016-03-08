@@ -109,10 +109,7 @@ public class MainActivity extends AppCompatActivity {
             String query = intent.getStringExtra(SearchManager.QUERY);
             Toast.makeText(MainActivity.this, "Searching for " + query, Toast.LENGTH_SHORT).show();
 
-            Cursor cursor = TopStoryDBHelper.getInstance(this).searchArticlesListByKeywords(query);
-
-            TextView textView = (TextView)findViewById(R.id.tempTempView);
-            textView.setText("Number of "+query+" in the database: "+cursor.getColumnIndex(TopStoryDBHelper.COL_SECTION));
+//            Cursor cursor = TopStoryDBHelper.getInstance(this).searchArticlesListByKeywords(query);
         }
     }
 
