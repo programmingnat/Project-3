@@ -1,5 +1,6 @@
 package com.imaginat.justhejist.jist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,19 +8,38 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.imaginat.justhejist.jist.customLayouts.NewsArticleListAdapter;
+
+import org.json.JSONObject;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     //hash: Ra/aSVj6IEwD+XYG+5pLHo0J9tQ=
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    CallbackManager callbackManager;
+    AccessTokenTracker accessTokenTracker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         String[] myDataset = new String[]{"test1","test2","test3","test4","test5"};
         mAdapter = new NewsArticleListAdapter(myDataset,this);
         mRecyclerView.setAdapter(mAdapter);
+        //------------------------------------------------------------------
 
         //------------------------------------------------------------------------------
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -56,6 +77,69 @@ public class MainActivity extends AppCompatActivity {
 
 
         //------------------------FACEBOOK BUTTONS---------------------------------------------
+        callbackManager = CallbackManager.Factory.create();
+        LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
+        loginButton.setReadPermissions("user_friends");
+
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "user_friends","user_posts"));
+
+
+         accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(
+                    AccessToken oldAccessToken,
+                    AccessToken currentAccessToken) {
+                // Set the access token using
+                // currentAccessToken when it's loaded or set.
+            }
+        };
+        // If the access token is available already assign it.
+
+        Button attemptNewsFeedPull = (Button)findViewById(R.id.attemptNewsFeedPull);
+        attemptNewsFeedPull.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //AccessToken token = AccessToken.getCurrentAccessToken();
+
+
+                AccessToken accessToken = AccessToken.getCurrentAccessToken();
+                Bundle params = new Bundle();
+                params.putString("fields", "id,name,link");
+
+               GraphRequest request= new GraphRequest(
+                        accessToken,
+                        "/5281959998/feed",
+                        params,
+                        HttpMethod.GET,
+                        new GraphRequest.Callback() {
+                            public void onCompleted(GraphResponse response) {
+                                JSONObject nyTimesObject = response.getJSONObject();
+                                Log.d("MainActivity","nyTimesObject "+nyTimesObject.toString());
+
+                            }
+                        }
+                );
+                request.executeAsync();
+
+
+            }
+        });
 //        ShareLinkContent content = new ShareLinkContent.Builder()
 //                .setContentUrl(Uri.parse("http://www.starwars.com/"))
 //                .build();
@@ -102,7 +186,22 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if(id==R.id.test_animate_scroll_vertical){
+
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        accessTokenTracker.stopTracking();
     }
 }
