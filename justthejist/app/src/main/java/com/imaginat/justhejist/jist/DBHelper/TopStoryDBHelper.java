@@ -5,6 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.imaginat.justhejist.jist.MainActivity;
 
 /**
  * Created by generalassembly on 3/8/16.
@@ -12,7 +16,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class TopStoryDBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "top_story";
     public static final String TABLE_NAME = "top_story_table";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
 
     public static final String COL_ID = "_id";
     public static final String COL_SECTION = "section";
@@ -33,7 +37,7 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
         return All_COLUMNS;
     }
 
-    public static final String CREATE = "CREATE TABLE " + DATABASE_NAME
+    public static final String CREATE = "CREATE TABLE " + TABLE_NAME
             + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_SECTION + " TEXT, "
             + COL_SUBSECTION + " TEXT, "
@@ -49,6 +53,7 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
 
     private TopStoryDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
     }
     //constructor in singleton should be private
 
@@ -57,6 +62,7 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
     public static TopStoryDBHelper getInstance(Context context) {
         if (Instance == null) {
             Instance = new TopStoryDBHelper(context);
+            Log.d("dude", "getInstance: " + CREATE);
         }
 
         return Instance;
@@ -64,7 +70,9 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("dude","before the creation");
         db.execSQL(CREATE);
+        Log.d("TopStoryDBHelper", "onCreate " + CREATE);
     }
 
     @Override
@@ -119,6 +127,25 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
         return rowsChanged;
     }
 
+    public void addArticletoDB(Context context) {
+
+       ContentValues values = new ContentValues();
+        values.put(COL_SECTION, "sexy");
+        values.put(COL_SUBSECTION, "sexy");
+        values.put(COL_ABSTRACT, "sexy");
+        values.put(COL_BYLINE, "sexy");
+        values.put(COL_UPDATE, "sexy");
+        values.put(COL_CREATED, "sexy");
+        values.put(COL_TITLE, "sexy");
+        values.put(COL_PUBLISHED, "sexy");
+        values.put(COL_KEYWORDS, "sexy");
+        values.put(COL_MULTIMEDIA, "sexy");
+        values.put(COL_URL, "sexy");
+
+        addArticle(values);
+        Toast.makeText(context, "DB ammended", Toast.LENGTH_LONG).show();
+    }
+
     public Cursor searchArticlesListByTitle (String query) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -140,7 +167,7 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
         Cursor cursorSearch = db.query(TABLE_NAME, // a. table
                 All_COLUMNS, // b. column names
                 COL_KEYWORDS + " LIKE ?", // c. selections
-                new String[]{"%" + query + "%", "%" + query + "%", "%" + query + "%"}, // d. selections args
+                new String[]{"%" + query + "%"}, // d. selections args
                 null, // e. group by
                 null, // f. having
                 null, // g. order by

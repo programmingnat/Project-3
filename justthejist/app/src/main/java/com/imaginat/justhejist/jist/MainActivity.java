@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private Button mButtonForAddingShitToDatabase;
+    private TopStoryDBHelper topStoryDBHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mButtonForAddingShitToDatabase = (Button) findViewById(R.id.search_button);
+
+        mButtonForAddingShitToDatabase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    topStoryDBHelper= TopStoryDBHelper.getInstance(MainActivity.this);
+                    topStoryDBHelper.addArticletoDB(MainActivity.this);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
@@ -109,7 +128,11 @@ public class MainActivity extends AppCompatActivity {
             String query = intent.getStringExtra(SearchManager.QUERY);
             Toast.makeText(MainActivity.this, "Searching for " + query, Toast.LENGTH_SHORT).show();
 
-//            Cursor cursor = TopStoryDBHelper.getInstance(this).searchArticlesListByKeywords(query);
+            Cursor cursor = TopStoryDBHelper.getInstance(this).searchArticlesListByKeywords(query);
+            cursor.moveToFirst();
+
+            TextView searchResult = (TextView) findViewById(R.id.tempTempView);
+            searchResult.setText(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_TITLE)));
         }
     }
 

@@ -22,6 +22,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_button" />
+
     <com.facebook.share.widget.ShareButton
     android:id="@+id/fb_share_button"
     android:layout_width="wrap_content"
