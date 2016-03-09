@@ -1,5 +1,7 @@
 package com.imaginat.justhejist.jist.api.nyt.gson;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Copyright 2016 Boloutare Doubeni
  */
@@ -11,7 +13,8 @@ public class Result {
    * FIXME(boloutaredoubeni) abstract is a for the article summary but also a
    * keyword in C# and Java
    */
-  //  private String abstract;
+  @SerializedName("abstract")
+    private String _abstract;
 
   private String created_date;
 
@@ -107,6 +110,13 @@ public class Result {
 
   public void setMaterial_type_facet(String material_type_facet) {
     this.material_type_facet = material_type_facet;
+  }
+
+  public String getAbstract() {
+    return _abstract;
+  }
+  public void setAbstract(String _abstract) {
+    this._abstract = _abstract;
   }
 
 

@@ -294,11 +294,11 @@ public class MainActivity extends AppCompatActivity {
     public static Account createSyncAccount(Context context) {
         Account newAccount = new Account(ACCOUNT, ACCOUNT_TYPE);
         AccountManager manager = (AccountManager)context.getSystemService(ACCOUNT_SERVICE);
-        if (manager.addAccountExplicitly(newAccount, null, null)) {
-
-        } else {
-
-        }
+//        if (manager.addAccountExplicitly(newAccount, null, null)) {
+//
+//        } else {
+//
+//        }
         return newAccount;
     }
 }
