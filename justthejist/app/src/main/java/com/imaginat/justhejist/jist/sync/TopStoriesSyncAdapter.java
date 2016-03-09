@@ -11,12 +11,10 @@ import android.util.Log;
 import com.imaginat.justhejist.jist.api.nyt.NYTApi;
 import com.imaginat.justhejist.jist.api.nyt.NYTService;
 import com.imaginat.justhejist.jist.api.nyt.Section;
-import com.imaginat.justhejist.jist.api.nyt.gson.Multimedia;
 import com.imaginat.justhejist.jist.api.nyt.gson.Result;
 import com.imaginat.justhejist.jist.api.nyt.gson.TopStoriesResponse;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -70,8 +68,8 @@ public class TopStoriesSyncAdapter extends AbstractThreadedSyncAdapter {
       }
       Log.v("Title", result.getTitle());
       Log.v("URL", result.getUrl());
-      List<Multimedia> media = Arrays.asList(result.getMultimedia());
-      Log.v("Media", "It is " + media.size());
+//      List<Multimedia> media = Arrays.asList(result.getMultimedia());
+//      Log.v("Media", "It is " + media.size());
     }
   }
 
