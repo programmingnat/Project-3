@@ -3,7 +3,9 @@ package com.imaginat.justhejist.jist.models;
 import com.imaginat.justhejist.jist.api.nyt.gson.Result;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Copyright 2016 Boloutare Doubeni
@@ -19,13 +21,38 @@ public class NewsStory {
   private final String mTitle;
   private final String mUrl;
   private final String mSection;
+  private Set<String> mKeywords;
 
-  private NewsStory(String title, String author, String summary, String url, String section) {
+  private NewsStory(String title, String author, String summary, String url, String section, Set<String> keywords) {
     mTitle = title;
     mAuthor = author;
     mSummary = summary;
-    mUrl =url;
+    mUrl = url;
     mSection = section;
+  }
+
+  public String getTitle() {
+    return mTitle;
+  }
+
+  public String getAuthor() {
+    return mAuthor;
+  }
+
+  public String getSummary() {
+    return mSummary;
+  }
+
+  public String getUrl() {
+    return mUrl;
+  }
+
+  public String getSection() {
+    return mSection;
+  }
+
+  public Set<String> getKeywords() {
+    return mKeywords;
   }
 
   public static List<NewsStory> createFrom(List<Result> results) {
@@ -50,6 +77,7 @@ public class NewsStory {
     private String mTitle;
     private String mUrl;
     private String mSection;
+    private Set<String> mKeywords = new HashSet<>();
 
     Builder() {}
 
@@ -83,8 +111,18 @@ public class NewsStory {
       return this;
     }
 
+    Builder keyword(String word) {
+      mKeywords.add(word);
+      return this;
+    }
+
+    Builder keyword(List<String> words) {
+      mKeywords.addAll(words);
+      return this;
+    }
+
     NewsStory build() {
-      return new NewsStory(mTitle, mAuthor, mSummary, mUrl, mSection);
+      return new NewsStory(mTitle, mAuthor, mSummary, mUrl, mSection, mKeywords);
     }
   }
 }

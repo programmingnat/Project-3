@@ -9,9 +9,6 @@ public class Result {
 
   /**
    * A short description for the article provided by the NYT
-   *
-   * FIXME(boloutaredoubeni) abstract is a for the article summary but also a
-   * keyword in C# and Java
    */
   @SerializedName("abstract")
   private String _abstract;
@@ -88,7 +85,7 @@ public class Result {
 //    this.multimedia = multimedia;
 //  }
 
-  // FIXME(boloutaredoubeni): Articles may contain mutliple author, not a problem, just a thought
+  // FIXME(boloutaredoubeni): Articles may contain mutliple authors, not a problem, just a thought
   public String getByline() { return byline; }
 
   public void setByline(String byline) { this.byline = byline; }

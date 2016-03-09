@@ -58,7 +58,7 @@ public class NYTimesGetData extends AsyncTask<String, Void, Void> {
     protected void onPostExecute(Void data) {
         super.onPostExecute(data);
         if (data == null) {
-            Toast.makeText(mActivity, "ERROR: no connectino found ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity, "ERROR: no connection found ", Toast.LENGTH_SHORT).show();
         }
         //mArrayAdapter.notifyDataSetChanged();
     }
