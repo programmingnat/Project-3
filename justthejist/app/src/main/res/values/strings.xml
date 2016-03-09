@@ -2,4 +2,5 @@
     <string name="app_name">Jist</string>
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">481839995340744</string>
+    <string name="sync_account">com.imaginat.justhejist.jist.account</string>
 </resources>

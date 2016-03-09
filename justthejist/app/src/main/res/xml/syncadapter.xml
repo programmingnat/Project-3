@@ -2,7 +2,7 @@
 <sync-adapter
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:contentAuthority="com.imaginat.justhejist.jist.webCommunication.StubProvider"
-    android:accountType="example.com"
+    android:accountType="@string/sync_account"
     android:userVisible="false"
     android:supportsUploading="true"
     android:allowParallelSyncs="false"

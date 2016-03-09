@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     ContentResolver mResolver;
 
     public static final String AUTHORITY = "com.imaginat.justhejist.jist.webCommunication.StubProvider";
-    public static final String ACCOUNT_TYPE = "example.com";
+    public static final String ACCOUNT_TYPE = "com.imaginat.justhejist.jist.account";
     public static final String ACCOUNT = "default_account";
 
     Account mAccount;
