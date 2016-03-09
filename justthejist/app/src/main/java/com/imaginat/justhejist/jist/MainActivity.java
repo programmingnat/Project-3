@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     AccessTokenTracker accessTokenTracker;
     ContentResolver mResolver;
 
-    public static final String AUTHORITY = "com.imaginat.justhejist.jist.sync.StubProvider";
+    public static final String AUTHORITY = "com.imaginat.justhejist.jist.webCommunication.StubProvider";
     public static final String ACCOUNT_TYPE = "example.com";
     public static final String ACCOUNT = "default_account";
 
@@ -85,10 +85,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Sync it up!!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Bundle bundle = new Bundle();
-                bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
-                bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
-                ContentResolver.requestSync(mAccount, AUTHORITY, bundle);
+                Bundle settingsBundle = new Bundle();
+                settingsBundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
+                settingsBundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED,true);
+
+                //request to sync, puts in queue. when it gets to ours it calls onPerformSync from syncAdapter Class
+                ContentResolver.requestSync(mAccount,AUTHORITY,settingsBundle);
             }
         });
 

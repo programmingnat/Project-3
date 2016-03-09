@@ -34,29 +34,20 @@
                   android:theme="@android:style/Theme.Translucent.NoTitleBar"
                   android:label="@string/app_name" />
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <service android:name=".services.TopStoriesSyncService"
-                 android:exported="true"
-                 android:process=":sync"
-                 android:permission="">
+
+        <service
+            android:name="com.imaginat.justhejist.jist.webCommunication.NYTimesSyncService">
             <intent-filter>
-                <action android:name="android.content.TopStoriesSyncAdapter"/>
+                <action android:name="android.content.SyncAdapter"/>
             </intent-filter>
             <meta-data
-                android:name="android.content.AbstractThreadedSyncAdapter"
-                android:resource="@xml/topstoriessyncadapter"/>
-        </service>
-        <service android:name=".services.AuthenticatorService">
-            <intent-filter>
-                <action android:name="android.account.Authenticator"/>
-            </intent-filter>
-            <meta-data
-                android:name="android.accounts.AccountAuthenticator"
-                android:resource="@xml/authenticator"/>
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
         </service>
         
         <provider
-            android:authorities="com.imaginat.justhejist.jist.sync.StubProvider"
-            android:name="com.imaginat.justhejist.jist.sync.StubProvider"
+            android:authorities="com.imaginat.justhejist.jist.webCommunication.StubProvider"
+            android:name="com.imaginat.justhejist.jist.webCommunication.StubProvider"
             android:label="my provider"
             android:exported="false"
             android:syncable="true" />
