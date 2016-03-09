@@ -2,14 +2,14 @@ package com.imaginat.justhejist.jist.onDemandUpdate;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.imaginat.justhejist.jist.api.nyt.NYTApi;
 import com.imaginat.justhejist.jist.api.nyt.NYTService;
 import com.imaginat.justhejist.jist.api.nyt.Section;
 import com.imaginat.justhejist.jist.api.nyt.gson.Result;
-import com.imaginat.justhejist.jist.api.nyt.gson.TopStoriesResponse;
+import com.imaginat.justhejist.jist.api.nyt.gson.TopStoriesResponseEntity;
+import com.imaginat.justhejist.jist.models.NewsStory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,18 +41,11 @@ public class NYTimesGetData extends AsyncTask<String, Void, Void> {
         NYTService service = retrofit.create(NYTService.class);
         // NOTE(boloutaredoubeni): trying out one call now ...
         try {
-            Call<TopStoriesResponse> call = service.listResults(Section.TECHNOLOGY);
-            TopStoriesResponse topStoriesResponse = call.execute().body();
-            List<Result> results = topStoriesResponse.getResults();
-            for (Result result : results) {
-                if (result.getSection().equals(Section.TECHNOLOGY)) {
-                    throw new Exception("Wrong section");
-                }
-                Log.v("Title", result.getTitle());
-                Log.v("URL", result.getUrl());
-//                List<Multimedia> media = Arrays.asList(result.getMultimedia());
-//                Log.v("Media", "It is " + media.size());
-            }
+            Call<TopStoriesResponseEntity> call = service.listResults(Section.TECHNOLOGY);
+            TopStoriesResponseEntity topStoriesResponseEntity = call.execute().body();
+            List<Result> results = topStoriesResponseEntity.getResults();
+            List<NewsStory> stories = NewsStory.createFrom(results);
+            // TODO(boloutaredoubeni): pass into adapter
         }catch(Exception ex){
             ex.printStackTrace();
         }

@@ -12,7 +12,7 @@ import com.imaginat.justhejist.jist.api.nyt.NYTApi;
 import com.imaginat.justhejist.jist.api.nyt.NYTService;
 import com.imaginat.justhejist.jist.api.nyt.Section;
 import com.imaginat.justhejist.jist.api.nyt.gson.Result;
-import com.imaginat.justhejist.jist.api.nyt.gson.TopStoriesResponse;
+import com.imaginat.justhejist.jist.api.nyt.gson.TopStoriesResponseEntity;
 
 import java.io.IOException;
 import java.util.List;
@@ -59,9 +59,9 @@ public class TopStoriesSyncAdapter extends AbstractThreadedSyncAdapter {
         .build();
     NYTService service = retrofit.create(NYTService.class);
     // NOTE(boloutaredoubeni): trying out one call now ...
-    Call<TopStoriesResponse> call = service.listResults(Section.TECHNOLOGY);
-    TopStoriesResponse topStoriesResponse = call.execute().body();
-    List<Result> results = topStoriesResponse.getResults();
+    Call<TopStoriesResponseEntity> call = service.listResults(Section.TECHNOLOGY);
+    TopStoriesResponseEntity topStoriesResponseEntity = call.execute().body();
+    List<Result> results = topStoriesResponseEntity.getResults();
     for (Result result : results) {
       if (result.getSection().equals( Section.TECHNOLOGY)) {
         throw new Exception("Wrong section");

@@ -21,7 +21,7 @@ public class MultimediaDeserializer implements JsonDeserializer<Multimedia>{
 
     }
 
-    class JSonMultiMedia extends Multimedia{
+    class JSonMultiMedia extends Multimedia {
 
     }
 }

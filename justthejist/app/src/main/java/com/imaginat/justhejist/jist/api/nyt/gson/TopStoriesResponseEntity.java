@@ -8,7 +8,7 @@ import java.util.List;
  * A class that holds the base object returned from the call to the NYT
  * TopStories API
  */
-public class TopStoriesResponse {
+public class TopStoriesResponseEntity {
   /**
    * If the api-key is invalid this field will be filled
    */
@@ -20,7 +20,7 @@ public class TopStoriesResponse {
   private String status;
 
   /**
-   * The section that was passed into the API calss
+   * The section that was passed into the API class
    */
   private String section;
   private double num_results;

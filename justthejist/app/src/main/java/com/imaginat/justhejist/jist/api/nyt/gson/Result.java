@@ -14,7 +14,7 @@ public class Result {
    * keyword in C# and Java
    */
   @SerializedName("abstract")
-    private String _abstract;
+  private String _abstract;
 
   private String created_date;
 
@@ -88,6 +88,7 @@ public class Result {
 //    this.multimedia = multimedia;
 //  }
 
+  // FIXME(boloutaredoubeni): Articles may contain mutliple author, not a problem, just a thought
   public String getByline() { return byline; }
 
   public void setByline(String byline) { this.byline = byline; }
