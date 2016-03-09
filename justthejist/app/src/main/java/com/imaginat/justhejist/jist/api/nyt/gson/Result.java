@@ -19,25 +19,23 @@ public class Result {
 
   private String subsection;
 
-  private String geo_facet;
-
-  private String per_facet;
+//  private String per_facet;
 
   private String section;
 
   private String url;
 
-  private String[] des_facet;
+ // private String[] des_facet;
 
   private String title;
 
-  private Multimedia[] multimedia;
+  //private Multimedia[] multimedia;
 
   private String byline;
 
   private String updated_date;
 
-  private String[] org_facet;
+ // private String[] org_facet;
 
   private String item_type;
 
@@ -59,13 +57,11 @@ public class Result {
 
   public void setSubsection(String subsection) { this.subsection = subsection; }
 
-  public String getGeo_facet() { return geo_facet; }
 
-  public void setGeo_facet(String geo_facet) { this.geo_facet = geo_facet; }
 
-  public String getPer_facet() { return per_facet; }
-
-  public void setPer_facet(String per_facet) { this.per_facet = per_facet; }
+//  public String getPer_facet() { return per_facet; }
+//
+//  public void setPer_facet(String per_facet) { this.per_facet = per_facet; }
 
   public String getSection() { return section; }
 
@@ -75,19 +71,19 @@ public class Result {
 
   public void setUrl(String url) { this.url = url; }
 
-  public String[] getDes_facet() { return des_facet; }
-
-  public void setDes_facet(String[] des_facet) { this.des_facet = des_facet; }
+//  public String[] getDes_facet() { return des_facet; }
+//
+//  public void setDes_facet(String[] des_facet) { this.des_facet = des_facet; }
 
   public String getTitle() { return title; }
 
   public void setTitle(String title) { this.title = title; }
 
-  public Multimedia[] getMultimedia() { return multimedia; }
-
-  public void setMultimedia(Multimedia[] multimedia) {
-    this.multimedia = multimedia;
-  }
+//  public Multimedia[] getMultimedia() { return multimedia; }
+//
+//  public void setMultimedia(Multimedia[] multimedia) {
+//    this.multimedia = multimedia;
+//  }
 
   public String getByline() { return byline; }
 
@@ -99,9 +95,9 @@ public class Result {
     this.updated_date = updated_date;
   }
 
-  public String[] getOrg_facet() { return org_facet; }
-
-  public void setOrg_facet(String[] org_facet) { this.org_facet = org_facet; }
+//  public String[] getOrg_facet() { return org_facet; }
+//
+//  public void setOrg_facet(String[] org_facet) { this.org_facet = org_facet; }
 
   public String getItem_type() { return item_type; }
 

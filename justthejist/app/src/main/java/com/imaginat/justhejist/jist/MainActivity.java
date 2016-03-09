@@ -1,20 +1,12 @@
 package com.imaginat.justhejist.jist;
 
-import android.content.Intent;
-
-
-import android.app.SearchManager;
-import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.SearchManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,10 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-
-import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -43,14 +32,12 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
-
-import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
-
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
+import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
 import com.imaginat.justhejist.jist.customLayouts.NewsArticleListAdapter;
+import com.imaginat.justhejist.jist.onDemandUpdate.NYTimesGetData;
 
 import org.json.JSONObject;
 
@@ -83,6 +70,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Button nyTimesUpdate = (Button)findViewById(R.id.updateNYTIMES);
+        nyTimesUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NYTimesGetData nyTimesGetData = new NYTimesGetData(MainActivity.this);
+                nyTimesGetData.execute();
+            }
+        });
 
 //        mButtonForAddingShitToDatabase = (Button) findViewById(R.id.search_button);
 //
@@ -275,6 +271,11 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        if(id==R.id.test_update_breakingNews){
+
+
+
+        }
         return super.onOptionsItemSelected(item);
     }
 
