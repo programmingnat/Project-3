@@ -100,9 +100,9 @@
     </string>
 
     <string-array name="choices">
-        <item>keywords</item>
-        <item>title</item>
-        <item>abstract</item>
+        <item>KEYWORDS</item>
+        <item>TITLE</item>
+        <item>SECTION</item>
     </string-array>
 
 </resources>

@@ -302,7 +302,7 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
                 public void onClick(DialogInterface dialog, int which) {
                   Resources res = getResources();
                   String[] choices = res.getStringArray(R.array.choices);
-                  mChoice = choices[which];
+                  mChoice = choices[which].toLowerCase();
                 }
               });
 
