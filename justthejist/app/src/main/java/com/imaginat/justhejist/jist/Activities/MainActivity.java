@@ -244,17 +244,31 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
 
   private void handleIntent(Intent intent) {
     if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-      String query = intent.getStringExtra(SearchManager.QUERY);
-      Toast.makeText(MainActivity.this, "Searching for " + query + "/n/r" + mChoice,
-                     Toast.LENGTH_SHORT)
-          .show();
+      if (mChoice != null) {
+        String query = intent.getStringExtra(SearchManager.QUERY);
+        Log.d("dude", mChoice);
+        Toast.makeText(MainActivity.this, "Searching for " + query + "/n/r" + mChoice,
+                Toast.LENGTH_SHORT)
+                .show();
 
-      Cursor cursor = TopStoryDBHelper.getInstance(this)
-                          .searchByUserCategory(query, mChoice);
-      cursor.moveToFirst();
+        Cursor cursor = TopStoryDBHelper.getInstance(this)
+                .searchByUserCategory(query, mChoice);
+        cursor.moveToFirst();
 
-      // TextView searchResult = (TextView) findViewById(R.id.tempTempView);
-      // searchResult.setText(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_TITLE)));
+        // TextView searchResult = (TextView) findViewById(R.id.tempTempView);
+        // searchResult.setText(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_TITLE)));
+      }
+
+      else {
+        String query = intent.getStringExtra(SearchManager.QUERY);
+        Toast.makeText(MainActivity.this, "Searching for " + query,
+                Toast.LENGTH_SHORT)
+                .show();
+
+        Cursor cursor = TopStoryDBHelper.getInstance(this)
+                .searchArticlesByAllThree(query);
+        cursor.moveToFirst();
+      }
     }
   }
 

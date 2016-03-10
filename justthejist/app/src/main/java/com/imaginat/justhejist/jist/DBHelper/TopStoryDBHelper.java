@@ -173,6 +173,22 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
         return cursorSearch;
   }
 
+    public Cursor searchArticlesByAllThree(String query) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursorSearch =
+                db.query(TABLE_NAME,              // a. table
+                        All_COLUMNS,             // b. column names
+                        COL_SECTION + " LIKE ? " + COL_KEYWORDS + " LIKE ? " + COL_TITLE + " LIKE ?", // c. selections
+                        new String[] {"%" + query + "%", "%" + query + "%", "%" + query + "%"}, // d. selections args
+                        null,                             // e. group by
+                        null,                             // f. having
+                        null,                             // g. order by
+                        null);                            // h. limit
+
+        return cursorSearch;
+    }
+
     public Cursor searchByUserCategory(String query, String category) {
         SQLiteDatabase db = this.getReadableDatabase();
 

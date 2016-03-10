@@ -57,43 +57,39 @@
     <color name="colorPrimaryDarkerFrag10">#FF6D00</color>
     <color name="colorAccentFrag10">#FF4081</color>
 
-    <color name="colorPrimaryFrag5">#4CAF50</color>
-    <color name="colorPrimaryDarkFrag5">#388E3C</color>
-    <color name="colorPrimaryDarkerFrag5">#1B5E20</color>
-    <color name="colorAccentFrag5">#FF4081</color>
+    <color name="colorPrimaryFrag11">#4CAF50</color>
+    <color name="colorPrimaryDarkFrag11">#388E3C</color>
+    <color name="colorPrimaryDarkerFrag11">#1B5E20</color>
+    <color name="colorAccentFrag11">#FF4081</color>
 
-    <color name="colorPrimaryFrag5">#4CAF50</color>
-    <color name="colorPrimaryDarkFrag5">#388E3C</color>
-    <color name="colorPrimaryDarkerFrag5">#1B5E20</color>
-    <color name="colorAccentFrag5">#FF4081</color>
+    <color name="colorPrimaryFrag12">#4CAF50</color>
+    <color name="colorPrimaryDarkFrag12">#388E3C</color>
+    <color name="colorPrimaryDarkerFrag12">#1B5E20</color>
+    <color name="colorAccentFrag12">#FF4081</color>
 
-    <color name="colorPrimaryFrag5">#4CAF50</color>
-    <color name="colorPrimaryDarkFrag5">#388E3C</color>
-    <color name="colorPrimaryDarkerFrag5">#1B5E20</color>
-    <color name="colorAccentFrag5">#FF4081</color>
+    <color name="colorPrimaryFrag13">#4CAF50</color>
+    <color name="colorPrimaryDarkFrag13">#388E3C</color>
+    <color name="colorPrimaryDarkerFrag13">#1B5E20</color>
+    <color name="colorAccentFrag13">#FF4081</color>
 
-    <color name="colorPrimaryFrag5">#4CAF50</color>
-    <color name="colorPrimaryDarkFrag5">#388E3C</color>
-    <color name="colorPrimaryDarkerFrag5">#1B5E20</color>
-    <color name="colorAccentFrag5">#FF4081</color>
+    <color name="colorPrimaryFrag14">#4CAF50</color>
+    <color name="colorPrimaryDarkFrag14">#388E3C</color>
+    <color name="colorPrimaryDarkerFrag14">#1B5E20</color>
+    <color name="colorAccentFrag14">#FF4081</color>
 
-    <color name="colorPrimaryFrag5">#4CAF50</color>
-    <color name="colorPrimaryDarkFrag5">#388E3C</color>
-    <color name="colorPrimaryDarkerFrag5">#1B5E20</color>
-    <color name="colorAccentFrag5">#FF4081</color>
+    <color name="colorPrimaryFrag15">#4CAF50</color>
+    <color name="colorPrimaryDarkFrag15">#388E3C</color>
+    <color name="colorPrimaryDarkerFrag15">#1B5E20</color>
+    <color name="colorAccentFrag15">#FF4081</color>
 
-    <color name="colorPrimaryFrag5">#4CAF50</color>
-    <color name="colorPrimaryDarkFrag5">#388E3C</color>
-    <color name="colorPrimaryDarkerFrag5">#1B5E20</color>
-    <color name="colorAccentFrag5">#FF4081</color>
+    <color name="colorPrimaryFrag16">#4CAF50</color>
+    <color name="colorPrimaryDarkFrag16">#388E3C</color>
+    <color name="colorPrimaryDarkerFrag16">#1B5E20</color>
+    <color name="colorAccentFrag16">#FF4081</color>
 
-    <color name="colorPrimaryFrag5">#4CAF50</color>
-    <color name="colorPrimaryDarkFrag5">#388E3C</color>
-    <color name="colorPrimaryDarkerFrag5">#1B5E20</color>
-    <color name="colorAccentFrag5">#FF4081</color>
+    <color name="colorPrimaryFrag17">#4CAF50</color>
+    <color name="colorPrimaryDarkFrag17">#388E3C</color>
+    <color name="colorPrimaryDarkerFrag17">#1B5E20</color>
+    <color name="colorAccentFrag17">#FF4081</color>
 
-    <color name="colorPrimaryFrag5">#4CAF50</color>
-    <color name="colorPrimaryDarkFrag5">#388E3C</color>
-    <color name="colorPrimaryDarkerFrag5">#1B5E20</color>
-    <color name="colorAccentFrag5">#FF4081</color>
 </resources>
