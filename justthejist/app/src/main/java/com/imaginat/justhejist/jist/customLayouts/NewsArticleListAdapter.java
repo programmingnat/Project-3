@@ -1,6 +1,7 @@
 package com.imaginat.justhejist.jist.customLayouts;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.imaginat.justhejist.jist.Activities.StoryActivity;
 import com.imaginat.justhejist.jist.R;
 import com.imaginat.justhejist.jist.models.NewsStory;
 import com.squareup.picasso.Picasso;
@@ -101,12 +103,22 @@ public class NewsArticleListAdapter
 
   // Replace the contents of a view (invoked by the layout manager)
   @Override
-  public void onBindViewHolder(ViewHolder holder, int position) {
+  public void onBindViewHolder(ViewHolder holder, final int position) {
     // - get element from your dataset at this position
     // - replace the contents of the view with that element
     // holder.mTextView.setText(mDataset[position]);
       NewsStory newsStory = mNewsStories.get(position);
       holder.mMainTextView.setText(newsStory.getSummary());
+    holder.mImageView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        NewsStory story = mNewsStories.get(position);
+        String url = story.getUrl();
+        Intent i = new Intent(mContext, StoryActivity.class);
+        i.putExtra("URL", url);
+        mContext.startActivity(i);
+      }
+    });
   }
 
   // Return the size of your dataset (invoked by the layout manager)
