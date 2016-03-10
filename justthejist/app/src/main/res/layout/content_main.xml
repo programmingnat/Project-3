@@ -9,14 +9,18 @@
 
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.imaginat.justhejist.jist.MainActivity"
+    tools:context=".Activities.MainActivity"
     tools:showIn="@layout/activity_main">
     <LinearLayout
         android:id="@+id/tempLinearLayout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+        <Button
+            android:id="@+id/Tabs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tabs"/>
         <Button
             android:id="@+id/updateNYTIMES"
             android:layout_width="wrap_content"

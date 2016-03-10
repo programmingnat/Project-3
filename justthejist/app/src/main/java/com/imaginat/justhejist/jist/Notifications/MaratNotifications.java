@@ -7,7 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 
-import com.imaginat.justhejist.jist.MainActivity;
+import com.imaginat.justhejist.jist.Activities.MainActivity;
 
 import java.io.IOException;
 import java.io.InputStream;

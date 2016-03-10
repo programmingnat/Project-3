@@ -1,4 +1,4 @@
-package com.imaginat.justhejist.jist;
+package com.imaginat.justhejist.jist.Activities;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -36,6 +36,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
+import com.imaginat.justhejist.jist.R;
 import com.imaginat.justhejist.jist.customLayouts.NewsArticleListAdapter;
 import com.imaginat.justhejist.jist.onDemandUpdate.NYTimesGetData;
 
@@ -79,6 +80,14 @@ public class MainActivity extends AppCompatActivity {
                 nyTimesGetData.execute();
             }
         });
+      // Tab button
+      findViewById(R.id.Tabs).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          Intent i = new Intent(MainActivity.this, TabsActivity.class);
+          startActivity(i);
+        }
+      });
 
 //        mButtonForAddingShitToDatabase = (Button) findViewById(R.id.search_button);
 //
