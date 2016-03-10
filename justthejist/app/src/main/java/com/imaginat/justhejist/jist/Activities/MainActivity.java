@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -37,14 +36,15 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
 import com.imaginat.justhejist.jist.R;
-import com.imaginat.justhejist.jist.customLayouts.NewsArticleListAdapter;
+import com.imaginat.justhejist.jist.models.NewsStory;
 import com.imaginat.justhejist.jist.onDemandUpdate.NYTimesGetData;
 
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NYTimesGetData.NYTimesDataReceivedInterface {
   // hash: Ra/aSVj6IEwD+XYG+5pLHo0J9tQ=
   private RecyclerView mRecyclerView;
   private RecyclerView.Adapter mAdapter;
@@ -108,21 +108,21 @@ public class MainActivity extends AppCompatActivity {
     //        });
 
     mAccount = createSyncAccount(this);
-    mRecyclerView = (RecyclerView)findViewById(R.id.my_recycler_view);
-
-    // use this setting to improve performance if you know that changes
-    // in content do not change the layout size of the RecyclerView
-    mRecyclerView.setHasFixedSize(true);
-    //
-    //        // use a linear layout manager
-    mLayoutManager = new LinearLayoutManager(this);
-    mRecyclerView.setLayoutManager(mLayoutManager);
-    //
-    //        // specify an adapter (see also next example)
-    String[] myDataset =
-        new String[] {"test1", "test2", "test3", "test4", "test5"};
-    mAdapter = new NewsArticleListAdapter(myDataset, this);
-    mRecyclerView.setAdapter(mAdapter);
+//    mRecyclerView = (RecyclerView)findViewById(R.id.my_recycler_view);
+//
+//    // use this setting to improve performance if you know that changes
+//    // in content do not change the layout size of the RecyclerView
+//    mRecyclerView.setHasFixedSize(true);
+//    //
+//    //        // use a linear layout manager
+//    mLayoutManager = new LinearLayoutManager(this);
+//    mRecyclerView.setLayoutManager(mLayoutManager);
+//    //
+//    //        // specify an adapter (see also next example)
+//    New[] myDataset =
+//        new String[] {"test1", "test2", "test3", "test4", "test5"};
+//    mAdapter = new NewsArticleListAdapter(myDataset, this);
+//    mRecyclerView.setAdapter(mAdapter);
     //------------------------------------------------------------------
 
     //------------------------------------------------------------------------------
@@ -281,6 +281,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     if (id == R.id.test_update_breakingNews) {
+      Toast.makeText(MainActivity.this,"attempting",Toast.LENGTH_SHORT).show();
     }
     return super.onOptionsItemSelected(item);
   }
@@ -308,5 +309,13 @@ public class MainActivity extends AppCompatActivity {
     //
     //        }
     return newAccount;
+  }
+
+
+
+
+  @Override
+  public void onCompleted(List<NewsStory> newStories) {
+
   }
 }

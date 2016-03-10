@@ -1,6 +1,5 @@
 package com.imaginat.justhejist.jist.onDemandUpdate;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -8,7 +7,6 @@ import android.widget.Toast;
 import com.imaginat.justhejist.jist.api.nyt.JSONParser;
 import com.imaginat.justhejist.jist.api.nyt.NYTApi;
 import com.imaginat.justhejist.jist.api.nyt.NYTService;
-import com.imaginat.justhejist.jist.api.nyt.Section;
 import com.imaginat.justhejist.jist.models.NewsStory;
 
 import java.util.List;
@@ -21,18 +19,24 @@ import retrofit2.Retrofit;
  * Created by nat on 3/9/16.
  */
 public class NYTimesGetData extends AsyncTask<String, Void, List<NewsStory>> {
-  String data = null;
-  Context mContext;
 
-  public NYTimesGetData(Activity a) { mContext = a; }
+  public interface NYTimesDataReceivedInterface{
+    public void onCompleted(List<NewsStory>newStories);
+  }
+
+  NYTimesDataReceivedInterface mNYTimesDataReceivedInterface=null;
+  public NYTimesGetData(NYTimesDataReceivedInterface a) { mNYTimesDataReceivedInterface = a; }
+
 
   @Override
   protected List<NewsStory> doInBackground(String... params) {
     String section = params[0];
+
+
     Retrofit retrofit = new Retrofit.Builder().baseUrl(NYTApi.BASE_URL).build();
     NYTService service = retrofit.create(NYTService.class);
     try {
-      Call<ResponseBody> call = service.getTopStories(Section.TECHNOLOGY);
+      Call<ResponseBody> call = service.getTopStories(section);
       ResponseBody body = call.execute().body();
       String json = body.string();
       return JSONParser.getStoriesFrom(json);
@@ -48,11 +52,13 @@ public class NYTimesGetData extends AsyncTask<String, Void, List<NewsStory>> {
   protected void onPostExecute(List<NewsStory> stories) {
     super.onPostExecute(stories);
     if (stories == null) {
-      Toast.makeText(mContext, "ERROR: no connection found ",
+      Toast.makeText((Context)mNYTimesDataReceivedInterface, "ERROR: no connection found ",
           Toast.LENGTH_SHORT)
           .show();
     }
     // TODO(programmingnat): pass into adapter
+    mNYTimesDataReceivedInterface.onCompleted(stories);
+    // mArrayAdapter.notifyDataSetChanged();
   }
 
 }
