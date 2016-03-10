@@ -7,7 +7,7 @@ import android.widget.Toast;
 import com.imaginat.justhejist.jist.api.nyt.NYTApi;
 import com.imaginat.justhejist.jist.api.nyt.NYTService;
 import com.imaginat.justhejist.jist.api.nyt.Section;
-import com.imaginat.justhejist.jist.api.nyt.json.JSONEntity;
+import com.imaginat.justhejist.jist.api.nyt.JSONParser;
 import com.imaginat.justhejist.jist.models.NewsStory;
 
 import java.io.BufferedReader;
@@ -39,7 +39,7 @@ public class NYTimesGetData extends AsyncTask<String, Void, Void> {
       Call<ResponseBody> call = service.getTopStories(Section.TECHNOLOGY);
       ResponseBody body = call.execute().body();
       String json = body.string();
-      stories = JSONEntity.getStoriesFrom(json);
+      stories = JSONParser.getStoriesFrom(json);
       // TODO(boloutaredoubeni): pass into adapter
     } catch (Exception ex) {
       ex.printStackTrace();

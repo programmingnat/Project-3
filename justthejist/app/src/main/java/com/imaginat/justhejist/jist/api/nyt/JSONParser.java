@@ -1,4 +1,4 @@
-package com.imaginat.justhejist.jist.api.nyt.json;
+package com.imaginat.justhejist.jist.api.nyt;
 
 import com.imaginat.justhejist.jist.models.NewsStory;
 
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Copyright 2016 Boloutare Doubeni
  */
-public class JSONEntity {
+public class JSONParser {
 
   private static final String RESULTS = "results";
   private static final String TITLE = "title";
@@ -22,7 +22,7 @@ public class JSONEntity {
   private static final String SECTION = "section";
   private static final String URL = "url";
 
-  private JSONEntity() { throw new AssertionError(); }
+  private JSONParser() { throw new AssertionError(); }
 
   public static List<NewsStory> getStoriesFrom(String json) {
     List<NewsStory> stories = new ArrayList<>();
