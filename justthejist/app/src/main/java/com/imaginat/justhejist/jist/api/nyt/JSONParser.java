@@ -23,9 +23,10 @@ public class JSONParser {
   private static final String SECTION = "section";
   private static final String URL = "url";
 
-  private static final String CAPTION = "caption";
+  private static final String  CAPTION = "caption";
   private static final String HEIGHT = "height";
   private static final String WIDTH = "width";
+  private static final String MEDIA_TYPE = "format";
 
   private JSONParser() { throw new AssertionError(); }
 
@@ -45,9 +46,10 @@ public class JSONParser {
             JSONObject mediumEntry = mediaArray.getJSONObject(j);
             Medium.Builder mediumBuilder = new Medium.Builder();
             Medium medium = mediumBuilder
-                .caption(mediumEntry.getString(CAPTION))
                 .dimensions(mediumEntry.getDouble(HEIGHT), mediumEntry.getDouble(WIDTH))
                 .url(mediumEntry.getString(URL))
+                .mediaType(mediumEntry.getString(MEDIA_TYPE))
+                .caption(mediumEntry.getString(CAPTION))
                 .build();
 
             media.add(medium);
