@@ -7,8 +7,7 @@ import android.widget.Toast;
 import com.imaginat.justhejist.jist.api.nyt.NYTApi;
 import com.imaginat.justhejist.jist.api.nyt.NYTService;
 import com.imaginat.justhejist.jist.api.nyt.Section;
-import com.imaginat.justhejist.jist.api.nyt.gson.Result;
-import com.imaginat.justhejist.jist.api.nyt.gson.TopStoriesResponseEntity;
+import com.imaginat.justhejist.jist.api.nyt.json.JSONEntity;
 import com.imaginat.justhejist.jist.models.NewsStory;
 
 import java.io.BufferedReader;
@@ -17,9 +16,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by nat on 3/9/16.
@@ -36,20 +35,19 @@ public class NYTimesGetData extends AsyncTask<String, Void, Void> {
     protected Void doInBackground(String... params) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(NYTApi.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
                 .build();
         NYTService service = retrofit.create(NYTService.class);
+      List<NewsStory> stories = null;
         // NOTE(boloutaredoubeni): trying out one call now ...
         try {
-            Call<TopStoriesResponseEntity> call = service.listResults(Section.TECHNOLOGY);
-            TopStoriesResponseEntity topStoriesResponseEntity = call.execute().body();
-            List<Result> results = topStoriesResponseEntity.getResults();
-            List<NewsStory> stories = NewsStory.createFrom(results);
+            Call<ResponseBody> call = service.getTopStories(Section.TECHNOLOGY);
+            ResponseBody body = call.execute().body();
+            String json = body.string();
+            stories = JSONEntity.getStoriesFrom(json);
             // TODO(boloutaredoubeni): pass into adapter
         }catch(Exception ex){
             ex.printStackTrace();
         }
-
 
         return null;
     }

@@ -6,20 +6,6 @@ import android.content.ContentProviderClient;
 import android.content.Context;
 import android.content.SyncResult;
 import android.os.Bundle;
-import android.util.Log;
-
-import com.imaginat.justhejist.jist.api.nyt.NYTApi;
-import com.imaginat.justhejist.jist.api.nyt.NYTService;
-import com.imaginat.justhejist.jist.api.nyt.Section;
-import com.imaginat.justhejist.jist.api.nyt.gson.Result;
-import com.imaginat.justhejist.jist.api.nyt.gson.TopStoriesResponseEntity;
-
-import java.io.IOException;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Copyright 2016 Boloutare Doubeni
@@ -41,7 +27,7 @@ public class TopStoriesSyncAdapter extends AbstractThreadedSyncAdapter {
       // pass the bundle data and get it
       // delete the old data
       // insert the new stuff
-      insertTopStories(provider);
+//      insertTopStories(provider);
     } catch (Throwable e) {
       e.printStackTrace();
       result.hasHardError();
@@ -52,26 +38,26 @@ public class TopStoriesSyncAdapter extends AbstractThreadedSyncAdapter {
    * Get the data from the NYT API and put it in the database
    * @param client
    */
-  private void insertTopStories(ContentProviderClient client) throws IOException, Exception{
-    Retrofit retrofit = new Retrofit.Builder()
-        .baseUrl(NYTApi.BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build();
-    NYTService service = retrofit.create(NYTService.class);
-    // NOTE(boloutaredoubeni): trying out one call now ...
-    Call<TopStoriesResponseEntity> call = service.listResults(Section.TECHNOLOGY);
-    TopStoriesResponseEntity topStoriesResponseEntity = call.execute().body();
-    List<Result> results = topStoriesResponseEntity.getResults();
-    for (Result result : results) {
-      if (result.getSection().equals( Section.TECHNOLOGY)) {
-        throw new Exception("Wrong section");
-      }
-      Log.v("Title", result.getTitle());
-      Log.v("URL", result.getUrl());
-//      List<Multimedia> media = Arrays.asList(result.getMultimedia());
-//      Log.v("Media", "It is " + media.size());
-    }
-  }
+//  private void insertTopStories(ContentProviderClient client) throws IOException, Exception{
+//    Retrofit retrofit = new Retrofit.Builder()
+//        .baseUrl(NYTApi.BASE_URL)
+//        .addConverterFactory(GsonConverterFactory.create())
+//        .build();
+//    NYTService service = retrofit.create(NYTService.class);
+//    // NOTE(boloutaredoubeni): trying out one call now ...
+//    Call<TopStoriesResponseEntity> call = service.listResults(Section.TECHNOLOGY);
+//    TopStoriesResponseEntity topStoriesResponseEntity = call.execute().body();
+//    List<Result> results = topStoriesResponseEntity.getResults();
+//    for (Result result : results) {
+//      if (result.getSection().equals( Section.TECHNOLOGY)) {
+//        throw new Exception("Wrong section");
+//      }
+//      Log.v("Title", result.getTitle());
+//      Log.v("URL", result.getUrl());
+////      List<Multimedia> media = Arrays.asList(result.getMultimedia());
+////      Log.v("Media", "It is " + media.size());
+//    }
+//  }
 
   private void deleteOldStories(ContentProviderClient client) {
   }

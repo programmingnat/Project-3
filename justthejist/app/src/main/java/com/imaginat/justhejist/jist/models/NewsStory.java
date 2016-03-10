@@ -1,8 +1,5 @@
 package com.imaginat.justhejist.jist.models;
 
-import com.imaginat.justhejist.jist.api.nyt.gson.Result;
-
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -55,21 +52,6 @@ public class NewsStory {
     return mKeywords;
   }
 
-  public static List<NewsStory> createFrom(List<Result> results) {
-    List<NewsStory> newsStories = new ArrayList<>();
-    for (final Result result : results) {
-      Builder builder = new Builder();
-      NewsStory story = builder
-          .author(result.getByline())
-          .summary(result.getAbstract())
-          .title(result.getTitle())
-          .url(result.getUrl())
-          .section(result.getSection())
-          .build();
-      newsStories.add(story);
-    }
-    return newsStories;
-  }
 
   public static class Builder {
     private String mAuthor;
@@ -79,49 +61,49 @@ public class NewsStory {
     private String mSection;
     private Set<String> mKeywords = new HashSet<>();
 
-    Builder() {}
+    public Builder() {}
 
-    Builder author(String author) {
+    public Builder author(String author) {
       mAuthor = author;
       return this;
     }
 
-    Builder summary(String summary) {
+    public Builder summary(String summary) {
       mSummary = summary;
       return this;
     }
 
-    Builder title(String title) {
+    public Builder title(String title) {
       mTitle = title;
       return this;
     }
 
-    Builder url(String url) {
+    public Builder url(String url) {
       mUrl = url;
       return this;
     }
 
-    Builder section(String section) {
+    public Builder section(String section) {
       mSection = section;
       return this;
     }
 
-    Builder multimedia(Object object) {
+    public Builder multimedia(Object object) {
       // FIXME(boloutaredoubeni): Not implemented yet
       return this;
     }
 
-    Builder keyword(String word) {
+    public Builder keyword(String word) {
       mKeywords.add(word);
       return this;
     }
 
-    Builder keyword(List<String> words) {
+    public Builder keyword(List<String> words) {
       mKeywords.addAll(words);
       return this;
     }
 
-    NewsStory build() {
+    public NewsStory build() {
       return new NewsStory(mTitle, mAuthor, mSummary, mUrl, mSection, mKeywords);
     }
   }
