@@ -8,8 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.imaginat.justhejist.jist.MainActivity;
-
 /**
  * Created by generalassembly on 3/8/16.
  */

@@ -1,4 +1,4 @@
-package com.imaginat.justhejist.jist;
+package com.imaginat.justhejist.jist.Activities;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -26,6 +26,7 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.LikeView;
 import com.facebook.share.widget.ShareButton;
 import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
+import com.imaginat.justhejist.jist.R;
 import com.imaginat.justhejist.jist.customLayouts.NewsArticleListAdapter;
 
 public class MainActivity extends AppCompatActivity {
