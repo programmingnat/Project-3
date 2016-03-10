@@ -5,11 +5,13 @@ import android.accounts.AccountManager;
 import android.app.SearchManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -275,6 +277,33 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
     // automatically handle clicks on the Home/Up button, so long
     // as you specify a parent activity in AndroidManifest.xml.
     int id = item.getItemId();
+
+    if (id == R.id.search) {
+
+      AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+      builder.setTitle("Fuck Yeah Dude")
+              .setItems(R.array.choices, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+              });
+
+      builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int id) {
+          // User clicked OK button
+        }
+      });
+
+      builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int id) {
+          // User cancelled the dialog
+        }
+      });
+
+      AlertDialog dialog = builder.create();
+      dialog.show();
+
+    }
 
     // noinspection SimplifiableIfStatement
     if (id == R.id.action_settings) {

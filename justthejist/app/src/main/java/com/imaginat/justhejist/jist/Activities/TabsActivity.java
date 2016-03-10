@@ -13,11 +13,13 @@ import android.view.MenuItem;
 import android.view.Window;
 
 import com.imaginat.justhejist.jist.R;
+import com.imaginat.justhejist.jist.api.nyt.Section;
 import com.imaginat.justhejist.jist.tabs.MyPageAdapter;
 
 public class TabsActivity extends AppCompatActivity {
     Toolbar mToolbar;
     Window mWindow;
+    String section = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +27,7 @@ public class TabsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tabs);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Tab 1");
+        getSupportActionBar().setTitle(section);
         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkerFrag1));
 //        mToolbar.setTitle("Tab 1");
 
@@ -34,9 +36,12 @@ public class TabsActivity extends AppCompatActivity {
 
 
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+        for (String section : Section.getSections()) {
+            tabLayout.addTab(tabLayout.newTab().setText(section));
+        }
+//        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkerFrag1));
 
