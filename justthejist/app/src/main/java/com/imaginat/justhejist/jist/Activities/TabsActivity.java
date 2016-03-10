@@ -15,7 +15,6 @@ import android.view.Window;
 import com.imaginat.justhejist.jist.R;
 import com.imaginat.justhejist.jist.tabs.MyPageAdapter;
 
-
 public class TabsActivity extends AppCompatActivity {
     Toolbar mToolbar;
     Window mWindow;
@@ -42,7 +41,6 @@ public class TabsActivity extends AppCompatActivity {
         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkerFrag1));
 
 
-
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final MyPageAdapter adapter = new MyPageAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
@@ -56,7 +54,7 @@ public class TabsActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
 
-                switch(viewPager.getCurrentItem()) {
+                switch (viewPager.getCurrentItem()) {
                     case 0:
                         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag1));
                         mToolbar.setTitle("Tab 1");
@@ -91,21 +89,19 @@ public class TabsActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_main, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    int id = item.getItemId();
+    if (id == R.id.action_settings) {
+      return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+    return super.onOptionsItemSelected(item);
+  }
 }
-
-
