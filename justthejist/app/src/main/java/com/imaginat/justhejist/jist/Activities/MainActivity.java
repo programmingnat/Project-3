@@ -7,6 +7,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
   public static final String ACCOUNT = "default_account";
 
   Account mAccount;
+  String mChoice = null;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -243,12 +245,12 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
   private void handleIntent(Intent intent) {
     if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
       String query = intent.getStringExtra(SearchManager.QUERY);
-      Toast.makeText(MainActivity.this, "Searching for " + query,
+      Toast.makeText(MainActivity.this, "Searching for " + query + "/n/r" + mChoice,
                      Toast.LENGTH_SHORT)
           .show();
 
       Cursor cursor = TopStoryDBHelper.getInstance(this)
-                          .searchArticlesListByKeywords(query);
+                          .searchByUserCategory(query, mChoice);
       cursor.moveToFirst();
 
       // TextView searchResult = (TextView) findViewById(R.id.tempTempView);
@@ -266,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
     SearchView searchView =
         (SearchView)menu.findItem(R.id.search).getActionView();
     searchView.setSearchableInfo(
-        searchManager.getSearchableInfo(getComponentName()));
+            searchManager.getSearchableInfo(getComponentName()));
 
     return true;
   }
@@ -284,21 +286,23 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
       builder.setTitle("Fuck Yeah Dude")
               .setItems(R.array.choices, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-
+                  Resources res = getResources();
+                  String[] choices = res.getStringArray(R.array.choices);
+                  mChoice = choices[which];
                 }
               });
 
-      builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int id) {
-          // User clicked OK button
-        }
-      });
-
-      builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int id) {
-          // User cancelled the dialog
-        }
-      });
+//      builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//        public void onClick(DialogInterface dialog, int id) {
+//          // User clicked OK button
+//        }
+//      });
+//
+//      builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+//        public void onClick(DialogInterface dialog, int id) {
+//          // User cancelled the dialog
+//        }
+//      });
 
       AlertDialog dialog = builder.create();
       dialog.show();
