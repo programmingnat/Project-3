@@ -1,13 +1,11 @@
 package com.imaginat.justhejist.jist.onDemandUpdate;
 
-import android.app.Activity;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
+import com.imaginat.justhejist.jist.api.nyt.JSONParser;
 import com.imaginat.justhejist.jist.api.nyt.NYTApi;
 import com.imaginat.justhejist.jist.api.nyt.NYTService;
 import com.imaginat.justhejist.jist.api.nyt.Section;
-import com.imaginat.justhejist.jist.api.nyt.JSONParser;
 import com.imaginat.justhejist.jist.models.NewsStory;
 
 import java.io.BufferedReader;
@@ -23,14 +21,17 @@ import retrofit2.Retrofit;
 /**
  * Created by nat on 3/9/16.
  */
-public class NYTimesGetData extends AsyncTask<String, Void, Void> {
+public class NYTimesGetData extends AsyncTask<String, Void, List<NewsStory>> {
+  public interface NYTimesDataReceivedInterface{
+    public void onCompleted(List<NewsStory>newStories);
+  }
   String data = null;
-  Activity mActivity;
-
-  public NYTimesGetData(Activity a) { mActivity = a; }
+  //Activity mActivity;
+  NYTimesDataReceivedInterface mNYTimesDataReceivedInterface=null;
+  public NYTimesGetData(NYTimesDataReceivedInterface a) { mNYTimesDataReceivedInterface = a; }
 
   @Override
-  protected Void doInBackground(String... params) {
+  protected List<NewsStory> doInBackground(String... params) {
     Retrofit retrofit = new Retrofit.Builder().baseUrl(NYTApi.BASE_URL).build();
     NYTService service = retrofit.create(NYTService.class);
     List<NewsStory> stories = null;
@@ -45,17 +46,16 @@ public class NYTimesGetData extends AsyncTask<String, Void, Void> {
       ex.printStackTrace();
     }
 
-    return null;
+    return stories;
   }
 
   @Override
-  protected void onPostExecute(Void data) {
+  protected void onPostExecute(List<NewsStory> data) {
     super.onPostExecute(data);
     if (data == null) {
-      Toast.makeText(mActivity, "ERROR: no connection found ",
-                     Toast.LENGTH_SHORT)
-          .show();
+
     }
+    mNYTimesDataReceivedInterface.onCompleted(data);
     // mArrayAdapter.notifyDataSetChanged();
   }
 
