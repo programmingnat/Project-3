@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.imaginat.justhejist.jist.R;
-import com.imaginat.justhejist.jist.api.nyt.Section;
 import com.imaginat.justhejist.jist.customLayouts.NewsArticleListAdapter;
 import com.imaginat.justhejist.jist.models.NewsStory;
 import com.imaginat.justhejist.jist.onDemandUpdate.NYTimesGetData;
@@ -63,12 +62,15 @@ public class TabFragment1 extends Fragment implements NYTimesGetData.NYTimesData
 
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         NYTimesGetData dataRetriever = new NYTimesGetData(this);
         Random random = new Random();
-        dataRetriever.execute(Section.getSections()[random.nextInt(Section.getSections().length)]);
+        String section  = getArguments().getString("SECTION");
+        dataRetriever.execute(section);
 
     }
 

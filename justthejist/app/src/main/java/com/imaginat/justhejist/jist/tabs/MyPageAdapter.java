@@ -1,8 +1,11 @@
 package com.imaginat.justhejist.jist.tabs;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.imaginat.justhejist.jist.api.nyt.Section;
 
 /**
  * Created by generalassembly on 3/9/16.
@@ -17,19 +20,13 @@ public class MyPageAdapter extends FragmentStatePagerAdapter {
 
   @Override
   public Fragment getItem(int position) {
-    switch (position) {
-    case 0:
+
       TabFragment1 tab1 = new TabFragment1();
+      Bundle bundle = new Bundle();
+      bundle.putString("SECTION", Section.getSections()[position]);
+      tab1.setArguments(bundle);
       return tab1;
-    case 1:
-      TabFragment2 tab2 = new TabFragment2();
-      return tab2;
-    case 2:
-      TabFragment3 tab3 = new TabFragment3();
-      return tab3;
-    default:
-      return null;
-    }
+
   }
 
   @Override
