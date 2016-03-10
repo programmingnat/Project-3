@@ -1,5 +1,6 @@
 package com.imaginat.justhejist.jist.api.nyt;
 
+import com.imaginat.justhejist.jist.models.Medium;
 import com.imaginat.justhejist.jist.models.NewsStory;
 
 import org.json.JSONArray;
@@ -22,6 +23,10 @@ public class JSONParser {
   private static final String SECTION = "section";
   private static final String URL = "url";
 
+  private static final String CAPTION = "caption";
+  private static final String HEIGHT = "height";
+  private static final String WIDTH = "width";
+
   private JSONParser() { throw new AssertionError(); }
 
   public static List<NewsStory> getStoriesFrom(String json) {
@@ -30,13 +35,30 @@ public class JSONParser {
       JSONObject jsonEntity = new JSONObject(json);
       JSONArray results = jsonEntity.getJSONArray(RESULTS);
       for (int i = 0; i < results.length(); ++i) {
+        ArrayList<Medium> media = new ArrayList<>();
         JSONObject result = results.getJSONObject(i);
-        NewsStory.Builder builder = new NewsStory.Builder();
-        NewsStory story = builder.title(result.getString(TITLE))
+        NewsStory.Builder storyBuilder = new NewsStory.Builder();
+        Object mediaEntry =  result.get(MEDIA);
+        if (mediaEntry instanceof JSONArray) {
+          JSONArray mediaArray = (JSONArray) mediaEntry;
+          for (int j = 0; j < mediaArray.length(); ++j) {
+            JSONObject mediumEntry = mediaArray.getJSONObject(j);
+            Medium.Builder mediumBuilder = new Medium.Builder();
+            Medium medium = mediumBuilder
+                .caption(mediumEntry.getString(CAPTION))
+                .dimensions(mediumEntry.getDouble(HEIGHT), mediumEntry.getDouble(WIDTH))
+                .url(mediumEntry.getString(URL))
+                .build();
+
+            media.add(medium);
+          }
+        }
+        NewsStory story = storyBuilder.title(result.getString(TITLE))
                               .author(result.getString(AUTHOR))
                               .summary(result.getString(SUMMARY))
                               .url(result.getString(URL))
                               .section(result.getString(SECTION))
+                              .multimedia(media)
                               .build();
         stories.add(story);
       }

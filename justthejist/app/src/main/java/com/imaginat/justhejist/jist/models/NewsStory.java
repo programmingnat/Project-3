@@ -1,5 +1,6 @@
 package com.imaginat.justhejist.jist.models;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,15 +19,17 @@ public class NewsStory {
   private final String mTitle;
   private final String mUrl;
   private final String mSection;
+  private List<Medium> mMedia;
   private Set<String> mKeywords;
 
   private NewsStory(String title, String author, String summary, String url,
-                    String section, Set<String> keywords) {
+                    String section, Set<String> keywords, List<Medium> media) {
     mTitle = title;
     mAuthor = author;
     mSummary = summary;
     mUrl = url;
     mSection = section;
+    mMedia = media;
   }
 
   public String getTitle() { return mTitle; }
@@ -39,6 +42,8 @@ public class NewsStory {
 
   public String getSection() { return mSection; }
 
+  public List<Medium> getMedia() { return mMedia; }
+
   public Set<String> getKeywords() { return mKeywords; }
 
   public static class Builder {
@@ -48,6 +53,7 @@ public class NewsStory {
     private String mUrl;
     private String mSection;
     private Set<String> mKeywords = new HashSet<>();
+    private List<Medium> mMedia = new ArrayList<>();
 
     public Builder() {}
 
@@ -76,8 +82,9 @@ public class NewsStory {
       return this;
     }
 
-    public Builder multimedia(Object object) {
-      // FIXME(boloutaredoubeni): Not implemented yet
+    public Builder multimedia(ArrayList<Medium> media) {
+      mMedia.clear();
+      mMedia.addAll(media);
       return this;
     }
 
@@ -93,7 +100,7 @@ public class NewsStory {
 
     public NewsStory build() {
       return new NewsStory(mTitle, mAuthor, mSummary, mUrl, mSection,
-                           mKeywords);
+                           mKeywords, mMedia);
     }
   }
 }
