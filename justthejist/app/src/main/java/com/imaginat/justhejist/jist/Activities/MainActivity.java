@@ -36,6 +36,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
 import com.imaginat.justhejist.jist.R;
+import com.imaginat.justhejist.jist.api.nyt.Section;
 import com.imaginat.justhejist.jist.models.NewsStory;
 import com.imaginat.justhejist.jist.onDemandUpdate.NYTimesGetData;
 
@@ -43,6 +44,7 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements NYTimesGetData.NYTimesDataReceivedInterface {
   // hash: Ra/aSVj6IEwD+XYG+5pLHo0J9tQ=
@@ -77,7 +79,8 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
       @Override
       public void onClick(View v) {
         NYTimesGetData nyTimesGetData = new NYTimesGetData(MainActivity.this);
-        nyTimesGetData.execute();
+        Random random = new Random();
+        nyTimesGetData.execute(Section.getSections()[random.nextInt(Section.getSections().length)]);
       }
     });
     // Tab button

@@ -14,12 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.imaginat.justhejist.jist.R;
+import com.imaginat.justhejist.jist.api.nyt.Section;
 import com.imaginat.justhejist.jist.customLayouts.NewsArticleListAdapter;
 import com.imaginat.justhejist.jist.models.NewsStory;
 import com.imaginat.justhejist.jist.onDemandUpdate.NYTimesGetData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class TabFragment1 extends Fragment implements NYTimesGetData.NYTimesDataReceivedInterface {
 
@@ -65,7 +67,8 @@ public class TabFragment1 extends Fragment implements NYTimesGetData.NYTimesData
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         NYTimesGetData dataRetriever = new NYTimesGetData(this);
-        dataRetriever.execute();
+        Random random = new Random();
+        dataRetriever.execute(Section.getSections()[random.nextInt(Section.getSections().length)]);
 
     }
 
