@@ -44,6 +44,7 @@ public class TabsActivity extends AppCompatActivity {
 //        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkerFrag1));
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
