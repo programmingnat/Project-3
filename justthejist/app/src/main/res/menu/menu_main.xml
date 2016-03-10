@@ -23,7 +23,7 @@
     <item
         android:id="@+id/test_update_breakingNews"
         android:orderInCategory="100"
-        android:title="attempt update image"
+        android:title="get facebook update"
         app:showAsAction="never"/>
     <item
         android:id="@+id/test_animate_scroll_vertical"

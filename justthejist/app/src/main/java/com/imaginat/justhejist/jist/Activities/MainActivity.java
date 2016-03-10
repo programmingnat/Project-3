@@ -281,6 +281,7 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
     }
 
     if (id == R.id.test_update_breakingNews) {
+      Toast.makeText(MainActivity.this,"attempting",Toast.LENGTH_SHORT).show();
     }
     return super.onOptionsItemSelected(item);
   }
