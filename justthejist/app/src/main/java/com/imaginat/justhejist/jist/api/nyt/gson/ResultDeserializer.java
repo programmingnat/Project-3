@@ -15,7 +15,9 @@ import java.lang.reflect.Type;
 public class ResultDeserializer implements JsonDeserializer<Result> {
 
   @Override
-  public Result deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+  public Result deserialize(JsonElement json, Type typeOfT,
+                            JsonDeserializationContext context)
+      throws JsonParseException {
     return null;
   }
 }

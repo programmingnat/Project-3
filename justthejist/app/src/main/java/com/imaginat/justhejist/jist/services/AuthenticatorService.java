@@ -12,17 +12,17 @@ import com.imaginat.justhejist.jist.sync.Authenticator;
  */
 public class AuthenticatorService extends Service {
 
-    private Authenticator mAuthenticator;
+  private Authenticator mAuthenticator;
 
-    @Override
-    public void onCreate() {
+  @Override
+  public void onCreate() {
 
-        mAuthenticator = new Authenticator(this);
-    }
+    mAuthenticator = new Authenticator(this);
+  }
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return mAuthenticator.getIBinder();
-    }
+  @Nullable
+  @Override
+  public IBinder onBind(Intent intent) {
+    return mAuthenticator.getIBinder();
+  }
 }

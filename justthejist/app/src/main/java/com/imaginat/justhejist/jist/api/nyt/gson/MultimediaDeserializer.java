@@ -10,18 +10,17 @@ import java.lang.reflect.Type;
 /**
  * Created by nat on 3/9/16.
  */
-public class MultimediaDeserializer implements JsonDeserializer<Multimedia>{
-    @Override
-    public Multimedia deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        if(json.isJsonArray()){
+public class MultimediaDeserializer implements JsonDeserializer<Multimedia> {
+  @Override
+  public Multimedia deserialize(JsonElement json, Type typeOfT,
+                                JsonDeserializationContext context)
+      throws JsonParseException {
+    if (json.isJsonArray()) {
 
-            return context.deserialize(json,JSonMultiMedia.class);
-        }
-        return null;
-
+      return context.deserialize(json, JSonMultiMedia.class);
     }
+    return null;
+  }
 
-    class JSonMultiMedia extends Multimedia {
-
-    }
+  class JSonMultiMedia extends Multimedia {}
 }

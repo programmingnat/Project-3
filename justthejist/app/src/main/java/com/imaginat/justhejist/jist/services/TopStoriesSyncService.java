@@ -19,7 +19,7 @@ public class TopStoriesSyncService extends Service {
     super.onCreate();
 
     synchronized (mSyncAdapterLock) {
-      if (mAdapter ==  null) {
+      if (mAdapter == null) {
         mAdapter = new TopStoriesSyncAdapter(getApplicationContext(), true);
       }
     }

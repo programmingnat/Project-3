@@ -20,7 +20,8 @@ public class NewsStory {
   private final String mSection;
   private Set<String> mKeywords;
 
-  private NewsStory(String title, String author, String summary, String url, String section, Set<String> keywords) {
+  private NewsStory(String title, String author, String summary, String url,
+                    String section, Set<String> keywords) {
     mTitle = title;
     mAuthor = author;
     mSummary = summary;
@@ -28,30 +29,17 @@ public class NewsStory {
     mSection = section;
   }
 
-  public String getTitle() {
-    return mTitle;
-  }
+  public String getTitle() { return mTitle; }
 
-  public String getAuthor() {
-    return mAuthor;
-  }
+  public String getAuthor() { return mAuthor; }
 
-  public String getSummary() {
-    return mSummary;
-  }
+  public String getSummary() { return mSummary; }
 
-  public String getUrl() {
-    return mUrl;
-  }
+  public String getUrl() { return mUrl; }
 
-  public String getSection() {
-    return mSection;
-  }
+  public String getSection() { return mSection; }
 
-  public Set<String> getKeywords() {
-    return mKeywords;
-  }
-
+  public Set<String> getKeywords() { return mKeywords; }
 
   public static class Builder {
     private String mAuthor;
@@ -104,7 +92,8 @@ public class NewsStory {
     }
 
     public NewsStory build() {
-      return new NewsStory(mTitle, mAuthor, mSummary, mUrl, mSection, mKeywords);
+      return new NewsStory(mTitle, mAuthor, mSummary, mUrl, mSection,
+                           mKeywords);
     }
   }
 }

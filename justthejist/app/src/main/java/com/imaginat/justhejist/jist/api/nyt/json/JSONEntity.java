@@ -22,9 +22,7 @@ public class JSONEntity {
   private static final String SECTION = "section";
   private static final String URL = "url";
 
-  private JSONEntity() {
-    throw new AssertionError();
-  }
+  private JSONEntity() { throw new AssertionError(); }
 
   public static List<NewsStory> getStoriesFrom(String json) {
     List<NewsStory> stories = new ArrayList<>();
@@ -34,13 +32,12 @@ public class JSONEntity {
       for (int i = 0; i < results.length(); ++i) {
         JSONObject result = results.getJSONObject(i);
         NewsStory.Builder builder = new NewsStory.Builder();
-        NewsStory story = builder
-            .title(result.getString(TITLE))
-            .author(result.getString(AUTHOR))
-            .summary(result.getString(SUMMARY))
-            .url(result.getString(URL))
-            .section(result.getString(SECTION))
-            .build();
+        NewsStory story = builder.title(result.getString(TITLE))
+                              .author(result.getString(AUTHOR))
+                              .summary(result.getString(SUMMARY))
+                              .url(result.getString(URL))
+                              .section(result.getString(SECTION))
+                              .build();
         stories.add(story);
       }
     } catch (JSONException e) {
@@ -49,6 +46,4 @@ public class JSONEntity {
     }
     return stories;
   }
-
-
 }
