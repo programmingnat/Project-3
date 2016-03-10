@@ -71,7 +71,6 @@ public class TabFragment1 extends Fragment implements NYTimesGetData.NYTimesData
         Random random = new Random();
         String section  = getArguments().getString("SECTION");
         dataRetriever.execute(section);
-
     }
 
     @Override
