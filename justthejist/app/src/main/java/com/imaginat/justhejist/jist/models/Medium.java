@@ -11,13 +11,15 @@ public class Medium {
   private final double mWidth;
   private final String mUrl;
   private final String mMediaType;
+  private final String mJSON;
 
-  private Medium(String caption, double height, double width, String url, String mediaType) {
+  private Medium(String caption, double height, double width, String url, String mediaType, String json) {
     mCaption = caption;
     mHeight = height;
     mWidth = width;
     mUrl = url;
     mMediaType = mediaType;
+    mJSON = json;
   }
 
   public String getCaption() {
@@ -37,12 +39,17 @@ public class Medium {
     return mMediaType;
   }
 
+  public String toJSON() {
+    return mJSON;
+  }
+
   public static class Builder {
     private String mCaption;
     private double mHeight;
     private double mWidth;
     private String mUrl;
     private String mMediaType;
+    private String mJSON;
 
     public Builder() {}
 
@@ -67,8 +74,13 @@ public class Medium {
       return this;
     }
 
+    public Builder json(String json) {
+      mJSON = json;
+      return this;
+    }
+
     public Medium build() {
-      return new Medium(mCaption, mHeight, mWidth, mUrl, mMediaType);
+      return new Medium(mCaption, mHeight, mWidth, mUrl, mMediaType, mJSON);
     }
   }
 }
