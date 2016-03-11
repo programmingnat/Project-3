@@ -7,8 +7,11 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.ContentObserver;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -102,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
 
 
     mAccount = createSyncAccount(this);
+    getContentResolver().registerContentObserver(Uri.parse("content://com.imaginat.justhejist.jist.sync.StubProvider"),true,new TopStoriesContentObserver(new Handler()));
 //
     //------------------------------------------------------------------
 
@@ -348,5 +352,23 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
   @Override
   public void onCompleted(List<NewsStory> newStories) {
 
+  }
+  public class TopStoriesContentObserver extends ContentObserver {
+
+    /**
+     * Creates a content observer.
+     *
+     * @param handler The handler to run {@link #onChange} on, or null if none.
+     */
+    public TopStoriesContentObserver(Handler handler) {
+      super(handler);
+    }
+
+    @Override
+    public void onChange(boolean selfChange, Uri uri) {
+      //do stuff on UI thread
+      Log.d(MainActivity.class.getName(), "CHANGE OBSERVED AT URI: " + uri);
+
+    }
   }
 }
