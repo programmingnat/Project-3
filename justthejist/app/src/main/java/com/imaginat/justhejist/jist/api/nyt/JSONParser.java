@@ -73,12 +73,14 @@ public class JSONParser {
     ArrayList<Medium> media = new ArrayList<>();
     for (int j = 0; j < multimedia.length(); ++j) {
       JSONObject mediumEntry = multimedia.getJSONObject(j);
+      String json = mediumEntry.toString();
       Medium.Builder mediumBuilder = new Medium.Builder();
       Medium medium = mediumBuilder
           .dimensions(mediumEntry.getDouble(HEIGHT), mediumEntry.getDouble(WIDTH))
           .url(mediumEntry.getString(URL))
           .mediaType(mediumEntry.getString(MEDIA_TYPE))
           .caption(mediumEntry.getString(CAPTION))
+          .json(json)
           .build();
 
       media.add(medium);
