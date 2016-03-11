@@ -69,7 +69,7 @@ public class JSONParser {
     return stories;
   }
 
-  private static List<Medium> parseMultimedia(JSONArray multimedia) throws JSONException {
+  public  static List<Medium> parseMultimedia(JSONArray multimedia) throws JSONException {
     ArrayList<Medium> media = new ArrayList<>();
     for (int j = 0; j < multimedia.length(); ++j) {
       JSONObject mediumEntry = multimedia.getJSONObject(j);

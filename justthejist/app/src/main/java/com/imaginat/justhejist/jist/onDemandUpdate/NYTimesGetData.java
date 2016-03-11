@@ -52,7 +52,9 @@ public class NYTimesGetData extends AsyncTask<String, Void, List<NewsStory>> {
         values.put(TopStoryDBHelper.COL_KEYWORDS, condensedKeywords);
         values.put(TopStoryDBHelper.COL_MULTIMEDIA, "multimedia"); /* FIXME: put as JSON */
         values.put(TopStoryDBHelper.COL_URL, story.getUrl());
-        TopStoryDBHelper.getInstance(mNYTimesDataReceivedInterface.resolveContext()).addArticle(values);
+        TopStoryDBHelper
+            .getInstance(mNYTimesDataReceivedInterface.resolveContext())
+            .addArticle(values);
       }
       return stories;
     } catch (Exception ex) {
