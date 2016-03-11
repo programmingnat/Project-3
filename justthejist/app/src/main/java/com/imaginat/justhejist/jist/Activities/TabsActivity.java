@@ -6,11 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -23,13 +20,18 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
-import com.imaginat.justhejist.jist.Notifications.MaratNotifications;
 import com.imaginat.justhejist.jist.R;
+import com.imaginat.justhejist.jist.api.nyt.JSONParser;
 import com.imaginat.justhejist.jist.api.nyt.Section;
+import com.imaginat.justhejist.jist.models.Medium;
 import com.imaginat.justhejist.jist.models.NewsStory;
 import com.imaginat.justhejist.jist.tabs.MyPageAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class TabsActivity extends AppCompatActivity {
     Toolbar mToolbar;
@@ -222,6 +224,15 @@ public class TabsActivity extends AppCompatActivity {
                     builder.title(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_TITLE)));
                     builder.summary(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_ABSTRACT)));
                     builder.url(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_URL)));
+
+                    List<Medium> media = new ArrayList<>();
+                    try {
+                        JSONArray mediaArray = new JSONArray(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_MULTIMEDIA)));
+                        media = JSONParser.parseMultimedia(mediaArray);
+                    } catch (JSONException ex) {
+                    }
+
+                    builder.multimedia(media);
                     NewsStory nw = builder.build();
                     newsStories.add(nw);
                 }
@@ -255,7 +266,7 @@ public class TabsActivity extends AppCompatActivity {
         SearchView searchView =
                 (SearchView)menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getComponentName()));
+            searchManager.getSearchableInfo(getComponentName()));
 
         return true;
     }
