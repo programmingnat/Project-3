@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    FacebookSdk.sdkInitialize(getApplicationContext());
+
     setContentView(R.layout.activity_main);
     Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);

@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
 import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
 import com.imaginat.justhejist.jist.R;
 import com.imaginat.justhejist.jist.api.nyt.JSONParser;
@@ -49,7 +50,7 @@ public class TabsActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle(Section.getSections()[0]);
         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkerFrag1));
-
+        FacebookSdk.sdkInitialize(getApplicationContext());
         Intent intent = getIntent();
         handleIntent(intent);
 
