@@ -26,7 +26,10 @@ import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
 import com.imaginat.justhejist.jist.Notifications.MaratNotifications;
 import com.imaginat.justhejist.jist.R;
 import com.imaginat.justhejist.jist.api.nyt.Section;
+import com.imaginat.justhejist.jist.models.NewsStory;
 import com.imaginat.justhejist.jist.tabs.MyPageAdapter;
+
+import java.util.ArrayList;
 
 public class TabsActivity extends AppCompatActivity {
     Toolbar mToolbar;
@@ -212,6 +215,20 @@ public class TabsActivity extends AppCompatActivity {
                 Cursor cursor = TopStoryDBHelper.getInstance(this)
                         .searchByUserCategory(query, mChoice);
                 cursor.moveToFirst();
+
+                //loop through cursor
+                ArrayList<NewsStory>newsStories = new ArrayList<>();
+                while(cursor.moveToNext()){
+                    NewsStory.Builder builder = new NewsStory.Builder();
+                    builder.author(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_BYLINE)));
+                    builder.title(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_TITLE)));
+                    builder.summary(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_ABSTRACT)));
+                    builder.url(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_URL)));
+                    NewsStory nw = builder.build();
+                    newsStories.add(nw);
+                }
+
+
 
                 // TextView searchResult = (TextView) findViewById(R.id.tempTempView);
                 // searchResult.setText(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_TITLE)));
