@@ -1,6 +1,8 @@
 package com.imaginat.justhejist.jist.Notifications;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -46,6 +48,12 @@ public class MaratNotifications {
     NotificationCompat.BigPictureStyle bigPic =
         new NotificationCompat.BigPictureStyle().bigPicture(
             getBitmapFromURL(mUrl));
+
+    Notification notification = builder.build();
+
+    NotificationManager notificationManager = (NotificationManager)mActivity.getSystemService(mActivity.NOTIFICATION_SERVICE);
+    notificationManager.notify(1,notification);
+
   }
 
   // turn the bitmap received into a url that is accepted in the big picture
