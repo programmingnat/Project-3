@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
   private Button mButtonForAddingShitToDatabase;
   private TopStoryDBHelper topStoryDBHelper;
 
+  private Button mCheckingNotification;
+  private MaratNotifications maratNotifications;
+
 
 
 
@@ -106,10 +109,19 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
       }
     });
 
+    mCheckingNotification = (Button) findViewById(R.id.button_for_notifications);
+    mCheckingNotification.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        maratNotifications = new MaratNotifications(MainActivity.this, "Teddy Bear", "http://media.salon.com/2016/01/ted-cruz.jpg");
+        maratNotifications.createNotificationForNewArticle();
+      }
+    });
 
-    mAccount = createSyncAccount(this);
-    getContentResolver().registerContentObserver(Uri.parse("content://com.imaginat.justhejist.jist.sync.StubProvider"),true,new TopStoriesContentObserver(new Handler()));
-//
+
+//    mAccount = createSyncAccount(this);
+//    getContentResolver().registerContentObserver(Uri.parse("content://com.imaginat.justhejist.jist.sync.StubProvider"),true,new TopStoriesContentObserver(new Handler()));
+////
     //------------------------------------------------------------------
 
     //------------------------------------------------------------------------------
