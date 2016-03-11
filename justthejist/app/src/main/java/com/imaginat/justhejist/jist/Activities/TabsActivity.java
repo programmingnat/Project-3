@@ -19,7 +19,6 @@ import com.imaginat.justhejist.jist.tabs.MyPageAdapter;
 public class TabsActivity extends AppCompatActivity {
     Toolbar mToolbar;
     Window mWindow;
-    String section = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,6 @@ public class TabsActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle(Section.getSections()[0]);
         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkerFrag1));
-//        mToolbar.setTitle("Tab 1");
 
         mWindow = this.getWindow();
         mWindow.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkerFrag1));
@@ -39,9 +37,7 @@ public class TabsActivity extends AppCompatActivity {
         for (String section : Section.getSections()) {
             tabLayout.addTab(tabLayout.newTab().setText(section));
         }
-//        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkerFrag1));
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -53,7 +49,6 @@ public class TabsActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-//        tabLayout.getTabAt(viewPager.getCurrentItem()).getText();
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
