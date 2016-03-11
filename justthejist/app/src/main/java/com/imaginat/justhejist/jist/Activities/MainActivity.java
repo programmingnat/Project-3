@@ -40,6 +40,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
+import com.imaginat.justhejist.jist.Notifications.MaratNotifications;
 import com.imaginat.justhejist.jist.R;
 import com.imaginat.justhejist.jist.api.nyt.Section;
 import com.imaginat.justhejist.jist.models.NewsStory;
@@ -368,7 +369,8 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
     public void onChange(boolean selfChange, Uri uri) {
       //do stuff on UI thread
       Log.d(MainActivity.class.getName(), "CHANGE OBSERVED AT URI: " + uri);
-
+      MaratNotifications mn = new MaratNotifications(MainActivity.this,"ArticleName","URL");
+      mn.createNotificationForNewArticle();
     }
   }
 }
