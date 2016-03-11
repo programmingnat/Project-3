@@ -17,7 +17,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -30,39 +29,31 @@ import android.widget.Toast;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
 import com.imaginat.justhejist.jist.Notifications.MaratNotifications;
 import com.imaginat.justhejist.jist.R;
-import com.imaginat.justhejist.jist.api.nyt.Section;
 import com.imaginat.justhejist.jist.models.NewsStory;
 import com.imaginat.justhejist.jist.onDemandUpdate.NYTimesGetData;
 
 import org.json.JSONObject;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 
 
 public class MainActivity extends AppCompatActivity implements NYTimesGetData.NYTimesDataReceivedInterface {
   // hash: Ra/aSVj6IEwD+XYG+5pLHo0J9tQ=
-  private RecyclerView mRecyclerView;
-  private RecyclerView.Adapter mAdapter;
-  private RecyclerView.LayoutManager mLayoutManager;
-
-  private Button mButtonForAddingShitToDatabase;
-  private TopStoryDBHelper topStoryDBHelper;
+//  private RecyclerView mRecyclerView;
+//  private RecyclerView.Adapter mAdapter;
+//  private RecyclerView.LayoutManager mLayoutManager;
+//
+//  private Button mButtonForAddingShitToDatabase;
+//  private TopStoryDBHelper topStoryDBHelper;
 
 
 
@@ -70,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
 
   CallbackManager callbackManager;
   AccessTokenTracker accessTokenTracker;
-  ContentResolver mResolver;
+//  ContentResolver mResolver;
 
   public static final String AUTHORITY =
       "com.imaginat.justhejist.jist.sync.StubProvider";
@@ -88,15 +79,15 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
     Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
-    Button nyTimesUpdate = (Button)findViewById(R.id.updateNYTIMES);
-    nyTimesUpdate.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        NYTimesGetData nyTimesGetData = new NYTimesGetData(MainActivity.this);
-        Random random = new Random();
-        nyTimesGetData.execute(Section.getSections()[random.nextInt(Section.getSections().length)]);
-      }
-    });
+//    Button nyTimesUpdate = (Button)findViewById(R.id.updateNYTIMES);
+//    nyTimesUpdate.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View v) {
+//        NYTimesGetData nyTimesGetData = new NYTimesGetData(MainActivity.this);
+//        Random random = new Random();
+//        nyTimesGetData.execute(Section.getSections()[random.nextInt(Section.getSections().length)]);
+//      }
+//    });
     // Tab button
     findViewById(R.id.Tabs).setOnClickListener(new View.OnClickListener() {
       @Override
@@ -137,29 +128,29 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
 
     //------------------------FACEBOOK
     // BUTTONS---------------------------------------------
-    callbackManager = CallbackManager.Factory.create();
-    LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
-    loginButton.setReadPermissions("user_friends");
-
-    LoginManager.getInstance().registerCallback(
-        callbackManager, new FacebookCallback<LoginResult>() {
-          @Override
-          public void onSuccess(LoginResult loginResult) {
-            // App code
-          }
-
-          @Override
-          public void onCancel() {
-            // App code
-          }
-
-          @Override
-          public void onError(FacebookException exception) {
-            // App code
-          }
-        });
-    LoginManager.getInstance().logInWithReadPermissions(
-        this, Arrays.asList("public_profile", "user_friends", "user_posts"));
+//    callbackManager = CallbackManager.Factory.create();
+//    LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
+//    loginButton.setReadPermissions("user_friends");
+//
+//    LoginManager.getInstance().registerCallback(
+//        callbackManager, new FacebookCallback<LoginResult>() {
+//          @Override
+//          public void onSuccess(LoginResult loginResult) {
+//            // App code
+//          }
+//
+//          @Override
+//          public void onCancel() {
+//            // App code
+//          }
+//
+//          @Override
+//          public void onError(FacebookException exception) {
+//            // App code
+//          }
+//        });
+//    LoginManager.getInstance().logInWithReadPermissions(
+//        this, Arrays.asList("public_profile", "user_friends", "user_posts"));
 
     accessTokenTracker = new AccessTokenTracker() {
       @Override
@@ -349,19 +340,28 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
          * Add the account and account type, no password or user data
          * If successful, return the Account object, otherwise report an error.
          */
-//    if (accountManager.addAccountExplicitly(newAccount, null, null)) {
-//          /*
-//           * If you don't set android:syncable="true" in
-//           * in your <provider> element in the manifest,
-//           * then call context.setIsSyncable(account, AUTHORITY, 1)
-//           * here.
-//           */
-//    } else {
-//            /*
-//             * The account exists or some other error occurred. Log this, report it,
-//             * or handle it internally.
-//             */
-//    }
+
+    try {
+
+
+      if (accountManager.addAccountExplicitly(newAccount, null, null)) {
+        //accountManager.addAccountExplicitly(newAccount, null, null)
+              /*
+               * If you don't set android:syncable="true" in
+               * in your <provider> element in the manifest,
+               * then call context.setIsSyncable(account, AUTHORITY, 1)
+               * here.
+               */
+      } else {
+                /*
+                 * The account exists or some other error occurred. Log this, report it,
+                 * or handle it internally.
+                 */
+      }
+    }catch(Exception ex){
+        Log.d("Exception ugh","excption "+ex.getMessage());
+      Log.d("Exception ugh","excption "+ex.toString());
+    }
     return newAccount;
   }
 

@@ -21,35 +21,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tabs"/>
-        <Button
-            android:id="@+id/updateNYTIMES"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="UPDATE"/>
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp" />
+        <!--<Button-->
+            <!--android:id="@+id/updateNYTIMES"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="UPDATE"/>-->
+        <!--<com.facebook.login.widget.LoginButton-->
+            <!--android:id="@+id/login_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--android:layout_marginBottom="30dp" />-->
 
-        <com.facebook.share.widget.ShareButton
-        android:id="@+id/fb_share_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-
+        <!--<com.facebook.share.widget.ShareButton-->
+        <!--android:id="@+id/fb_share_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"/>-->
 
 
 
 
-    <com.facebook.share.widget.LikeView
-    android:background="#00FF00"
-    android:id="@+id/testFacebookLikeButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/fb_share_button"/>
+
+
+    <!--<com.facebook.share.widget.LikeView-->
+    <!--android:background="#00FF00"-->
+    <!--android:id="@+id/testFacebookLikeButton"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/fb_share_button"/>-->
 
 
         <Button
@@ -61,76 +61,76 @@
 
 
     </LinearLayout>
-    <HorizontalScrollView
-        android:id="@+id/section_scroll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:layout_below="@id/tempLinearLayout">
-        <LinearLayout
+    <!--<HorizontalScrollView-->
+        <!--android:id="@+id/section_scroll"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:scrollbars="none"-->
+        <!--android:layout_below="@id/tempLinearLayout">-->
+        <!--<LinearLayout-->
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation='horizontal'>
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation='horizontal'>-->
 
-            <TextView
-                android:text="HOME |"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"/>
-            <TextView
-                android:text="WORLD |"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"/>
-            <TextView
-                android:text="US |"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"/>
-            <TextView
-                android:text="POLITICS |"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"/>
-            <TextView
-                android:text="NY |"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"/>
-            <TextView
-                android:text="TECH |"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"/>
-            <TextView
-                android:text="SCIENCE |"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"/>
-            <TextView
-                android:text="BUSINESS |"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"/>
-            <TextView
-                android:text="OPINION |"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"/>
-            <TextView
-                android:text="HEALTH |"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"/>
-            <TextView
-                android:text="SPORTS |"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"/>
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:text="HOME |"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="20sp"/>-->
+            <!--<TextView-->
+                <!--android:text="WORLD |"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="20sp"/>-->
+            <!--<TextView-->
+                <!--android:text="US |"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="20sp"/>-->
+            <!--<TextView-->
+                <!--android:text="POLITICS |"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="20sp"/>-->
+            <!--<TextView-->
+                <!--android:text="NY |"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="20sp"/>-->
+            <!--<TextView-->
+                <!--android:text="TECH |"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="20sp"/>-->
+            <!--<TextView-->
+                <!--android:text="SCIENCE |"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="20sp"/>-->
+            <!--<TextView-->
+                <!--android:text="BUSINESS |"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="20sp"/>-->
+            <!--<TextView-->
+                <!--android:text="OPINION |"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="20sp"/>-->
+            <!--<TextView-->
+                <!--android:text="HEALTH |"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="20sp"/>-->
+            <!--<TextView-->
+                <!--android:text="SPORTS |"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="20sp"/>-->
+        <!--</LinearLayout>-->
 
-    </HorizontalScrollView>
+    <!--</HorizontalScrollView>-->
     <!--<LinearLayout-->
         <!--android:id="@+id/theTopLinearLayout"-->
         <!--android:layout_width="match_parent"-->
