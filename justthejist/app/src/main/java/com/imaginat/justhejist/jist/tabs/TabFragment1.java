@@ -4,6 +4,7 @@ package com.imaginat.justhejist.jist.tabs;
  * Created by generalassembly on 3/9/16.
  */
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,7 +21,6 @@ import com.imaginat.justhejist.jist.onDemandUpdate.NYTimesGetData;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class TabFragment1 extends Fragment implements NYTimesGetData.NYTimesDataReceivedInterface {
 
@@ -68,7 +68,6 @@ public class TabFragment1 extends Fragment implements NYTimesGetData.NYTimesData
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         NYTimesGetData dataRetriever = new NYTimesGetData(this);
-        Random random = new Random();
         String section  = getArguments().getString("SECTION");
         dataRetriever.execute(section);
     }
@@ -77,5 +76,10 @@ public class TabFragment1 extends Fragment implements NYTimesGetData.NYTimesData
     public void onCompleted(List<NewsStory>stories) {
         ArrayList<NewsStory>newsStories=(ArrayList)stories;
         mAdapter.swap(newsStories);
+    }
+
+    @Override
+    public Context resolveContext() {
+        return getContext();
     }
 }

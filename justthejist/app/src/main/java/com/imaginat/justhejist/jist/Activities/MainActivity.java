@@ -7,8 +7,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.ContentObserver;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
     findViewById(R.id.Tabs).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent i = new Intent(MainActivity.this, TabsActivity.class);
+        Intent i = new Intent(MainActivity.this, com.imaginat.justhejist.jist.Activities.TabsActivity.class);
         startActivity(i);
       }
     });
@@ -361,19 +361,19 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
          * Add the account and account type, no password or user data
          * If successful, return the Account object, otherwise report an error.
          */
-    if (accountManager.addAccountExplicitly(newAccount, null, null)) {
-          /*
-           * If you don't set android:syncable="true" in
-           * in your <provider> element in the manifest,
-           * then call context.setIsSyncable(account, AUTHORITY, 1)
-           * here.
-           */
-    } else {
-            /*
-             * The account exists or some other error occurred. Log this, report it,
-             * or handle it internally.
-             */
-    }
+//    if (accountManager.addAccountExplicitly(newAccount, null, null)) {
+//          /*
+//           * If you don't set android:syncable="true" in
+//           * in your <provider> element in the manifest,
+//           * then call context.setIsSyncable(account, AUTHORITY, 1)
+//           * here.
+//           */
+//    } else {
+//            /*
+//             * The account exists or some other error occurred. Log this, report it,
+//             * or handle it internally.
+//             */
+//    }
     return newAccount;
   }
 
@@ -384,6 +384,12 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
   public void onCompleted(List<NewsStory> newStories) {
 
   }
+
+  @Override
+  public Context resolveContext() {
+    return this;
+  }
+
   public class TopStoriesContentObserver extends ContentObserver {
 
     /**

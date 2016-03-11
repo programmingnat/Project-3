@@ -57,11 +57,7 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
         </activity>
-        <!--<provider-->
-        <!--android:name="com.imaginat.justhejist.jist.sync.StubProvider"-->
-        <!--android:authorities="com.imaginat.justhejist.jist.sync.StubProvider"-->
-        <!--android:exported="false"-->
-        <!--android:syncable="true"/>-->
+
         <service
             android:name="com.imaginat.justhejist.jist.sync.MySyncService">
             <intent-filter>
@@ -71,29 +67,6 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/syncadapter" />
         </service>
-        <!--<service-->
-            <!--android:name=".services.TopStoriesSyncService"-->
-            <!--android:exported="true"-->
-            <!--android:permission=""-->
-            <!--android:process=":sync">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.content.TopStoriesSyncAdapter"/>-->
-            <!--</intent-filter>-->
-
-            <!--<meta-data-->
-                <!--android:name="android.content.AbstractThreadedSyncAdapter"-->
-                <!--android:resource="@xml/topstoriessyncadapter"/>-->
-        <!--</service>-->
-        <!--<service android:name=".services.AuthenticatorService">-->
-
-            <!--<intent-filter>-->
-                <!--<action android:name="android.content.SyncAdapter"/>-->
-            <!--</intent-filter>-->
-
-            <!--<meta-data-->
-                <!--android:name="android.content.SyncAdapter"-->
-                <!--android:resource="@xml/syncadapter" />-->
-        <!--</service>-->
 
 
         <provider
