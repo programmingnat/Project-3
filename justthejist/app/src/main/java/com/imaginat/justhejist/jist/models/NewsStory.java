@@ -82,7 +82,7 @@ public class NewsStory {
       return this;
     }
 
-    public Builder multimedia(ArrayList<Medium> media) {
+    public Builder multimedia(List<Medium> media) {
       mMedia.clear();
       mMedia.addAll(media);
       return this;
