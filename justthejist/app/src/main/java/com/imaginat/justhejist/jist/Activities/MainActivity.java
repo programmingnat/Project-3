@@ -48,6 +48,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+
+
 public class MainActivity extends AppCompatActivity implements NYTimesGetData.NYTimesDataReceivedInterface {
   // hash: Ra/aSVj6IEwD+XYG+5pLHo0J9tQ=
   private RecyclerView mRecyclerView;
@@ -56,6 +58,10 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
 
   private Button mButtonForAddingShitToDatabase;
   private TopStoryDBHelper topStoryDBHelper;
+
+
+
+
 
   CallbackManager callbackManager;
   AccessTokenTracker accessTokenTracker;
@@ -94,40 +100,9 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
       }
     });
 
-    //        mButtonForAddingShitToDatabase = (Button)
-    //        findViewById(R.id.search_button);
-    //
-    //        mButtonForAddingShitToDatabase.setOnClickListener(new
-    //        View.OnClickListener() {
-    //            @Override
-    //            public void onClick(View v) {
-    //                try {
-    //                    topStoryDBHelper=
-    //                    TopStoryDBHelper.getInstance(MainActivity.this);
-    //                    topStoryDBHelper.addArticletoDB(MainActivity.this);
-    //
-    //                } catch (Exception e) {
-    //                    e.printStackTrace();
-    //                }
-    //            }
-    //        });
 
     mAccount = createSyncAccount(this);
-//    mRecyclerView = (RecyclerView)findViewById(R.id.my_recycler_view);
 //
-//    // use this setting to improve performance if you know that changes
-//    // in content do not change the layout size of the RecyclerView
-//    mRecyclerView.setHasFixedSize(true);
-//    //
-//    //        // use a linear layout manager
-//    mLayoutManager = new LinearLayoutManager(this);
-//    mRecyclerView.setLayoutManager(mLayoutManager);
-//    //
-//    //        // specify an adapter (see also next example)
-//    New[] myDataset =
-//        new String[] {"test1", "test2", "test3", "test4", "test5"};
-//    mAdapter = new NewsArticleListAdapter(myDataset, this);
-//    mRecyclerView.setAdapter(mAdapter);
     //------------------------------------------------------------------
 
     //------------------------------------------------------------------------------
@@ -138,10 +113,18 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
         Snackbar.make(view, "Sync it up!!", Snackbar.LENGTH_LONG)
             .setAction("Action", null)
             .show();
-        Bundle bundle = new Bundle();
-        bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
-        bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
-        ContentResolver.requestSync(mAccount, AUTHORITY, bundle);
+        Bundle settingsBundle = new Bundle();
+        settingsBundle.putBoolean(
+                ContentResolver.SYNC_EXTRAS_MANUAL, true);
+        settingsBundle.putBoolean(
+                ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+                /*
+                 * Request the sync for the default account, authority, and
+                 * manual sync settings
+                 */
+        ContentResolver.requestSync(mAccount, AUTHORITY, settingsBundle);
+
+
       }
     });
 
@@ -332,14 +315,30 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
   }
 
   public static Account createSyncAccount(Context context) {
-    Account newAccount = new Account(ACCOUNT, ACCOUNT_TYPE);
-    AccountManager manager =
-        (AccountManager)context.getSystemService(ACCOUNT_SERVICE);
-    //        if (manager.addAccountExplicitly(newAccount, null, null)) {
-    //
-    //        } else {
-    //
-    //        }
+    // Create the account type and default account
+    Account newAccount = new Account(
+            ACCOUNT, ACCOUNT_TYPE);
+    // Get an instance of the Android account manager
+    AccountManager accountManager =
+            (AccountManager) context.getSystemService(
+                    ACCOUNT_SERVICE);
+        /*
+         * Add the account and account type, no password or user data
+         * If successful, return the Account object, otherwise report an error.
+         */
+    if (accountManager.addAccountExplicitly(newAccount, null, null)) {
+          /*
+           * If you don't set android:syncable="true" in
+           * in your <provider> element in the manifest,
+           * then call context.setIsSyncable(account, AUTHORITY, 1)
+           * here.
+           */
+    } else {
+            /*
+             * The account exists or some other error occurred. Log this, report it,
+             * or handle it internally.
+             */
+    }
     return newAccount;
   }
 

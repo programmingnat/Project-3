@@ -43,35 +43,26 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <service android:name=".services.TopStoriesSyncService"
-                 android:exported="true"
-                 android:process=":sync"
-                 android:permission="">
-            <intent-filter>
-                <action android:name="android.content.TopStoriesSyncAdapter"/>
-            </intent-filter>
-            <meta-data
-                android:name="android.content.AbstractThreadedSyncAdapter"
-                android:resource="@xml/topstoriessyncadapter"/>
-        </service>
-        <service android:name=".services.AuthenticatorService">
-            <intent-filter>
-                <action android:name="android.account.Authenticator"/>
-            </intent-filter>
-            <meta-data
-                android:name="android.accounts.AccountAuthenticator"
-                android:resource="@xml/authenticator"/>
-        </service>
-        
-        <provider
-            android:authorities="com.imaginat.justhejist.jist.sync.StubProvider"
-            android:name="com.imaginat.justhejist.jist.sync.StubProvider"
-            android:label="my provider"
-            android:exported="false"
-            android:syncable="true" />
+
+
         <activity android:name=".Activities.TabsActivity"
             android:parentActivityName=".Activities.MainActivity">
         </activity>
+        <provider
+        android:name="com.imaginat.justhejist.jist.sync.StubProvider"
+        android:authorities="com.imaginat.justhejist.jist.sync.StubProvider"
+        android:exported="false"
+        android:syncable="true"/>
+        <service
+            android:name="com.imaginat.justhejist.jist.sync.MySyncService">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
+        </service>
+
     </application>
 
 </manifest>

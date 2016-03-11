@@ -34,7 +34,7 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
                     COL_PUBLISHED, COL_KEYWORDS, COL_MULTIMEDIA, COL_URL};
 
   public static String[] getAllColumns() { return All_COLUMNS; }
-
+    private Context mContext;
   public static final String CREATE =
       "CREATE TABLE " + TABLE_NAME + " (" + COL_ID +
       " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_SECTION + " TEXT, " +
@@ -45,6 +45,7 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
 
   private TopStoryDBHelper(Context context) {
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
+      mContext=context;
   }
   // constructor in singleton should be private
 
@@ -104,23 +105,12 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
     return rowsChanged;
   }
 
-  public void addArticletoDB(Context context) {
+  public void addArticletoDB(ContentValues values) {
 
-    ContentValues values = new ContentValues();
-    values.put(COL_SECTION, "sexy");
-    values.put(COL_SUBSECTION, "sexy");
-    values.put(COL_ABSTRACT, "sexy");
-    values.put(COL_BYLINE, "sexy");
-    values.put(COL_UPDATE, "sexy");
-    values.put(COL_CREATED, "sexy");
-    values.put(COL_TITLE, "sexy");
-    values.put(COL_PUBLISHED, "sexy");
-    values.put(COL_KEYWORDS, "sexy");
-    values.put(COL_MULTIMEDIA, "sexy");
-    values.put(COL_URL, "sexy");
+
 
     addArticle(values);
-    Toast.makeText(context, "DB ammended", Toast.LENGTH_LONG).show();
+    Toast.makeText(mContext, "DB ammended ", Toast.LENGTH_LONG).show();
   }
 
   public Cursor searchArticlesListByTitle(String query) {
