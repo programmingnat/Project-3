@@ -39,7 +39,10 @@ public class NYTimesGetData extends AsyncTask<String, Void, List<NewsStory>> {
       for (NewsStory story : stories) {
         ContentValues values = new ContentValues();
         List<String> keywords = new ArrayList<>();
-        keywords.addAll(story.getKeywords());
+        if(story.getKeywords()!=null){
+          keywords.addAll(story.getKeywords());
+        }
+
         String condensedKeywords = Utils.joinString(keywords);
         values.put(TopStoryDBHelper.COL_SECTION, story.getSection());
         values.put(TopStoryDBHelper.COL_SUBSECTION, "subsection");
