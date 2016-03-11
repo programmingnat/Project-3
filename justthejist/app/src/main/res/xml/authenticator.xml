@@ -2,8 +2,6 @@
 <account-authenticator
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:accountType="example.com"
-    android:icon="@android:drawable/ic_lock_silent_mode"
-    android:smallIcon="@android:drawable/ic_lock_silent_mode"
-    android:label="@string/app_name">
-
-</account-authenticator>
+    android:icon="@mipmap/ic_launcher"
+    android:smallIcon="@mipmap/ic_launcher"
+    android:label="@string/app_name"/>

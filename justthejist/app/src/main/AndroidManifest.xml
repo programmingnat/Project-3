@@ -104,7 +104,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.imaginat.justhejist.jist.Activities.TabsActivity"/>
         </activity>
-
+        <service
+            android:name="com.imaginat.justhejist.jist.sync.AuthenticatorService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
     </application>
 
 </manifest>
