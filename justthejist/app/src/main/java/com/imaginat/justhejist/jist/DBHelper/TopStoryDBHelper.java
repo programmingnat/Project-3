@@ -99,7 +99,7 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
   public int updateArticlesById(String id, ContentValues values) {
     SQLiteDatabase db = this.getWritableDatabase();
     int rowsChanged =
-        db.update(TABLE_NAME, values, COL_ID + " = ?", new String[] {id});
+        db.update(TABLE_NAME, values, COL_ID + " = ?", new String[]{id});
     db.close();
 
     return rowsChanged;
@@ -160,6 +160,38 @@ public class TopStoryDBHelper extends SQLiteOpenHelper {
                  null,                             // g. order by
                  null);                            // h. limit
 
-    return cursorSearch;
+        return cursorSearch;
   }
+
+    public Cursor searchArticlesByAllThree(String query) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursorSearch =
+                db.query(TABLE_NAME,              // a. table
+                        All_COLUMNS,             // b. column names
+                        COL_SECTION + " LIKE ? " + COL_KEYWORDS + " LIKE ? " + COL_TITLE + " LIKE ?", // c. selections
+                        new String[] {"%" + query + "%", "%" + query + "%", "%" + query + "%"}, // d. selections args
+                        null,                             // e. group by
+                        null,                             // f. having
+                        null,                             // g. order by
+                        null);                            // h. limit
+
+        return cursorSearch;
+    }
+
+    public Cursor searchByUserCategory(String query, String category) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursorSearch =
+                db.query(TABLE_NAME,
+                        All_COLUMNS,
+                        category + " LIKE ? ",
+                        new String[] {"%" + query + "%"}, // d. selections args
+                        null,                             // e. group by
+                        null,                             // f. having
+                        null,                             // g. order by
+                        null);
+
+        return cursorSearch;
+    }
 }
