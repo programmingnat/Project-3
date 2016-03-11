@@ -39,28 +39,50 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 
+
+
+
+        <activity android:name=".Activities.TabsActivity"
+            android:parentActivityName=".Activities.MainActivity">
+        </activity>
+        <!--<provider-->
+        <!--android:name="com.imaginat.justhejist.jist.sync.StubProvider"-->
+        <!--android:authorities="com.imaginat.justhejist.jist.sync.StubProvider"-->
+        <!--android:exported="false"-->
+        <!--android:syncable="true"/>-->
         <service
-            android:name=".services.TopStoriesSyncService"
-            android:exported="true"
-            android:permission=""
-            android:process=":sync">
+            android:name="com.imaginat.justhejist.jist.sync.MySyncService">
             <intent-filter>
-                <action android:name="android.content.TopStoriesSyncAdapter"/>
+                <action android:name="android.content.SyncAdapter"/>
             </intent-filter>
-
             <meta-data
-                android:name="android.content.AbstractThreadedSyncAdapter"
-                android:resource="@xml/topstoriessyncadapter"/>
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
         </service>
-        <service android:name=".services.AuthenticatorService">
-            <intent-filter>
-                <action android:name="android.account.Authenticator"/>
-            </intent-filter>
+        <!--<service-->
+            <!--android:name=".services.TopStoriesSyncService"-->
+            <!--android:exported="true"-->
+            <!--android:permission=""-->
+            <!--android:process=":sync">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.content.TopStoriesSyncAdapter"/>-->
+            <!--</intent-filter>-->
 
-            <meta-data
-                android:name="android.accounts.AccountAuthenticator"
-                android:resource="@xml/authenticator"/>
-        </service>
+            <!--<meta-data-->
+                <!--android:name="android.content.AbstractThreadedSyncAdapter"-->
+                <!--android:resource="@xml/topstoriessyncadapter"/>-->
+        <!--</service>-->
+        <!--<service android:name=".services.AuthenticatorService">-->
+
+            <!--<intent-filter>-->
+                <!--<action android:name="android.content.SyncAdapter"/>-->
+            <!--</intent-filter>-->
+
+            <!--<meta-data-->
+                <!--android:name="android.content.SyncAdapter"-->
+                <!--android:resource="@xml/syncadapter" />-->
+        <!--</service>-->
+
 
         <provider
             android:name=".sync.StubProvider"
@@ -69,10 +91,10 @@
             android:label="my provider"
             android:syncable="true"/>
 
-        <activity
-            android:name=".Activities.TabsActivity"
-            android:parentActivityName=".Activities.MainActivity">
-        </activity>
+        <!--<activity-->
+            <!--android:name=".Activities.TabsActivity"-->
+            <!--android:parentActivityName=".Activities.MainActivity">-->
+        <!--</activity>-->
         <activity
             android:name=".Activities.StoryActivity"
             android:label="@string/title_activity_story"
@@ -82,6 +104,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.imaginat.justhejist.jist.Activities.TabsActivity"/>
         </activity>
+
     </application>
 
 </manifest>

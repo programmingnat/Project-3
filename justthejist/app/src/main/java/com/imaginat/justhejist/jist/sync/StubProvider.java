@@ -2,20 +2,46 @@ package com.imaginat.justhejist.jist.sync;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
+
+import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
 
 /**
  * Created by drewmahrt on 3/2/16.
  */
 public class StubProvider extends ContentProvider {
+
+  private static final String AUTHORITY = "com.imaginat.justthejist.jist.sync.StubProvider";
+  private static final String NEWS_STORY_TABLE = TopStoryDBHelper.TABLE_NAME;
+  public static final Uri CONTENT_URI = Uri.parse("content://"
+          + AUTHORITY + "/" + NEWS_STORY_TABLE);
+
+  public static final int ARTICLES=0;
+  public static final int KEYWORDS = 1;
+  public static final int TITLE = 2;
+  public static final int CONTENT=3;
+  public static final int ARTICLE_ID=4;
+
+  private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
+  static {
+    sURIMatcher.addURI(AUTHORITY,NEWS_STORY_TABLE,ARTICLES);
+    sURIMatcher.addURI(AUTHORITY, NEWS_STORY_TABLE + "/#", ARTICLE_ID);
+  }
+
+  private TopStoryDBHelper dbHelper;
   /*
    * Always return true, indicating that the
    * provider loaded correctly.
    */
   @Override
   public boolean onCreate() {
-    return true;
+    dbHelper = TopStoryDBHelper.getInstance(getContext());
+    return false;
+
   }
   /*
    * Return no type for MIME type
@@ -38,7 +64,21 @@ public class StubProvider extends ContentProvider {
    */
   @Override
   public Uri insert(Uri uri, ContentValues values) {
-    return null;
+    Log.d("StubProvider","Insider insert");
+    long id = dbHelper.addArticle(values);
+    /*int uriType = sURIMatcher.match(uri);
+
+    long id = 0;
+    switch (uriType) {
+      case ARTICLES:
+        id = dbHelper.addArticle(values);
+        break;
+      default:
+        throw new IllegalArgumentException("Unknown URI: " + uri);
+    }*/
+    getContext().getContentResolver().notifyChange(uri, null);
+    return Uri.parse(ARTICLES + "/" + id);
+
   }
   /*
    * delete() always returns "no rows affected" (0)
