@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
 import com.imaginat.justhejist.jist.api.nyt.NYTApi;
+import com.imaginat.justhejist.jist.models.Medium;
 import com.imaginat.justhejist.jist.models.NewsStory;
 import com.imaginat.justhejist.jist.utils.Utils;
 
@@ -43,6 +44,11 @@ public class NYTimesGetData extends AsyncTask<String, Void, List<NewsStory>> {
           keywords.addAll(story.getKeywords());
         }
 
+        List<String> multimediaJSON = new ArrayList<>();
+        for (final Medium medium : story.getMedia()) {
+          multimediaJSON.add(medium.toJSON());
+        }
+        String mediaJSONArray = '[' + Utils.joinString(multimediaJSON) + ']';
         String condensedKeywords = Utils.joinString(keywords);
         values.put(TopStoryDBHelper.COL_SECTION, story.getSection());
         values.put(TopStoryDBHelper.COL_SUBSECTION, "subsection");
@@ -53,7 +59,7 @@ public class NYTimesGetData extends AsyncTask<String, Void, List<NewsStory>> {
         values.put(TopStoryDBHelper.COL_TITLE, story.getTitle());
         values.put(TopStoryDBHelper.COL_PUBLISHED, "published");
         values.put(TopStoryDBHelper.COL_KEYWORDS, condensedKeywords);
-        values.put(TopStoryDBHelper.COL_MULTIMEDIA, "multimedia"); /* FIXME: put as JSON */
+        values.put(TopStoryDBHelper.COL_MULTIMEDIA, multimediaJSON.size() > 0 ? mediaJSONArray : "\"\"");
         values.put(TopStoryDBHelper.COL_URL, story.getUrl());
         TopStoryDBHelper
             .getInstance(mNYTimesDataReceivedInterface.resolveContext())
