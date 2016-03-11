@@ -61,67 +61,67 @@ public class TabsActivity extends AppCompatActivity {
                 viewPager.setCurrentItem(tab.getPosition());
 
                 switch (viewPager.getCurrentItem()) {
-                    case 0:
+                    case 6:
                         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag1));
                         mToolbar.setTitle(Section.getSections()[tab.getPosition()]);
                         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag1));
                         mWindow.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkerFrag1));
                         break;
-                    case 1:
+                    case 7:
                         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag2));
                         mToolbar.setTitle(Section.getSections()[tab.getPosition()]);
                         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag2));
                         mWindow.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkerFrag2));
                         break;
-                    case 2:
+                    case 8:
                         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag3));
                         mToolbar.setTitle(Section.getSections()[tab.getPosition()]);
                         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag3));
                         mWindow.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkerFrag3));
                         break;
-                    case 3:
+                    case 9:
                         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag4));
                         mToolbar.setTitle(Section.getSections()[tab.getPosition()]);
                         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag4));
                         mWindow.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkerFrag4));
                         break;
-                    case 4:
+                    case 10:
                         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag5));
                         mToolbar.setTitle(Section.getSections()[tab.getPosition()]);
                         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag5));
                         mWindow.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkerFrag5));
                         break;
-                    case 5:
+                    case 0:
                         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag6));
                         mToolbar.setTitle(Section.getSections()[tab.getPosition()]);
                         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag6));
                         mWindow.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkerFrag6));
                         break;
-                    case 6:
+                    case 1:
                         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag7));
                         mToolbar.setTitle(Section.getSections()[tab.getPosition()]);
                         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag7));
                         mWindow.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkerFrag7));
                         break;
-                    case 7:
+                    case 2:
                         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag8));
                         mToolbar.setTitle(Section.getSections()[tab.getPosition()]);
                         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag8));
                         mWindow.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkerFrag8));
                         break;
-                    case 8:
+                    case 3:
                         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag9));
                         mToolbar.setTitle(Section.getSections()[tab.getPosition()]);
                         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag9));
                         mWindow.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkerFrag9));
                         break;
-                    case 9:
+                    case 4:
                         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag10));
                         mToolbar.setTitle(Section.getSections()[tab.getPosition()]);
                         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag10));
                         mWindow.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkerFrag10));
                         break;
-                    case 10:
+                    case 5:
                         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag11));
                         mToolbar.setTitle(Section.getSections()[tab.getPosition()]);
                         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkFrag11));
