@@ -1,24 +1,43 @@
 package com.imaginat.justhejist.jist.Activities;
 
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.Toast;
 
+import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
+import com.imaginat.justhejist.jist.Notifications.MaratNotifications;
 import com.imaginat.justhejist.jist.R;
 import com.imaginat.justhejist.jist.api.nyt.Section;
+import com.imaginat.justhejist.jist.models.NewsStory;
 import com.imaginat.justhejist.jist.tabs.MyPageAdapter;
+
+import java.util.ArrayList;
 
 public class TabsActivity extends AppCompatActivity {
     Toolbar mToolbar;
     Window mWindow;
+
+    String section = null;
+    String mChoice = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +47,9 @@ public class TabsActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle(Section.getSections()[0]);
         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDarkerFrag1));
+
+        Intent intent = getIntent();
+        handleIntent(intent);
 
         mWindow = this.getWindow();
         mWindow.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkerFrag1));
@@ -175,18 +197,116 @@ public class TabsActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            if (mChoice != null) {
+                String query = intent.getStringExtra(SearchManager.QUERY);
+                Log.d("dude", mChoice);
+                Toast.makeText(TabsActivity.this, "Searching for " + query + "/n/r" + mChoice,
+                        Toast.LENGTH_SHORT)
+                        .show();
+
+                Cursor cursor = TopStoryDBHelper.getInstance(this)
+                        .searchByUserCategory(query, mChoice);
+                cursor.moveToFirst();
+
+                //loop through cursor
+                ArrayList<NewsStory>newsStories = new ArrayList<>();
+                while(cursor.moveToNext()){
+                    NewsStory.Builder builder = new NewsStory.Builder();
+                    builder.author(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_BYLINE)));
+                    builder.title(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_TITLE)));
+                    builder.summary(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_ABSTRACT)));
+                    builder.url(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_URL)));
+                    NewsStory nw = builder.build();
+                    newsStories.add(nw);
+                }
+
+
+
+                // TextView searchResult = (TextView) findViewById(R.id.tempTempView);
+                // searchResult.setText(cursor.getString(cursor.getColumnIndex(TopStoryDBHelper.COL_TITLE)));
+            }
+
+            else {
+                String query = intent.getStringExtra(SearchManager.QUERY);
+                Toast.makeText(TabsActivity.this, "Searching for " + query,
+                        Toast.LENGTH_SHORT)
+                        .show();
+
+                Cursor cursor = TopStoryDBHelper.getInstance(this)
+                        .searchArticlesByAllThree(query);
+                cursor.moveToFirst();
+            }
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        SearchManager searchManager =
+                (SearchManager)getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView)menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        if (id == R.id.search) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(TabsActivity.this);
+            builder.setTitle("Please Select What To Search By")
+                    .setItems(R.array.choices, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Resources res = getResources();
+                            String[] choices = res.getStringArray(R.array.choices);
+                            mChoice = choices[which].toLowerCase();
+                        }
+                    });
+
+//      builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//        public void onClick(DialogInterface dialog, int id) {
+//          // User clicked OK button
+//        }
+//      });
+//
+//      builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+//        public void onClick(DialogInterface dialog, int id) {
+//          // User cancelled the dialog
+//        }
+//      });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+        }
+
+        // noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.test_animate_scroll_vertical) {
+        }
 
+        if (id == R.id.test_update_breakingNews) {
+            Toast.makeText(TabsActivity.this,"attempting",Toast.LENGTH_SHORT).show();
+        }
         return super.onOptionsItemSelected(item);
     }
+
 }

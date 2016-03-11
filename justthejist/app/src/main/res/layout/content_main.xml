@@ -21,35 +21,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tabs"/>
-        <!--<Button-->
-            <!--android:id="@+id/updateNYTIMES"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="UPDATE"/>-->
-        <!--<com.facebook.login.widget.LoginButton-->
-            <!--android:id="@+id/login_button"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:layout_marginTop="30dp"-->
-            <!--android:layout_marginBottom="30dp" />-->
 
-        <!--<com.facebook.share.widget.ShareButton-->
-        <!--android:id="@+id/fb_share_button"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"/>-->
+        <Button
+            android:id="@+id/updateNYTIMES"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UPDATE"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notification"
+            android:id="@+id/button_for_notifications" />
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp" />
 
+        <com.facebook.share.widget.ShareButton
+        android:id="@+id/fb_share_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-
-
-
-
-    <!--<com.facebook.share.widget.LikeView-->
-    <!--android:background="#00FF00"-->
-    <!--android:id="@+id/testFacebookLikeButton"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@id/fb_share_button"/>-->
 
 
         <Button

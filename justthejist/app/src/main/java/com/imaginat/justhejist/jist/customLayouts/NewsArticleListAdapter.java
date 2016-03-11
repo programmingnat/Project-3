@@ -51,12 +51,13 @@ public class NewsArticleListAdapter
       super(v);
       CardView cardView = (CardView)v.findViewById(R.id.card_view);
       LinearLayout rl = (LinearLayout)cardView.findViewById(R.id.relativeInsideward);
+
       mImageView =
           (ImageView)rl.findViewById(R.id.theMainImage);
 
          mMainTextView =
                 (TextView)rl.findViewById(R.id.theMainText);
-        mMainTextView.setTextColor(Color.rgb(255, 255, 255));
+        //mMainTextView.setTextColor(Color.rgb(255, 255, 255));
         mMainTextView.setText("HELLO HELLO");
     }
   }

@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 
 import com.imaginat.justhejist.jist.Activities.MainActivity;
+import com.imaginat.justhejist.jist.R;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,22 +33,27 @@ public class MaratNotifications {
 
   // big picture notification for every time a breaking news article is synced
   public void createNotificationForNewArticle() {
+    NotificationCompat.BigPictureStyle bigPic = new NotificationCompat.BigPictureStyle();
+    bigPic.bigPicture(BitmapFactory.decodeResource(mActivity.getResources(), R.drawable.joe_biden_nyt)).build();
     NotificationCompat.Builder builder =
         new NotificationCompat.Builder(mActivity);
-    builder.setSmallIcon(android.R.drawable.ic_lock_idle_lock);
+    builder.setSmallIcon(R.drawable.nyt_icon);
     builder.setContentTitle("New Article: " + nameOfArticle);
+//    builder.setContentInfo("Check Out This New Interesting Story");
     builder.setContentText("Check Out This New Interesting Story");
 
     Intent notificationIntent = new Intent(mActivity, MainActivity.class);
     PendingIntent pendingIntent = PendingIntent.getActivity(
-        mActivity, (int)System.currentTimeMillis(), notificationIntent, 0);
+            mActivity, (int) System.currentTimeMillis(), notificationIntent, 0);
 
     builder.setContentIntent(pendingIntent);
     builder.setAutoCancel(true);
 
-    NotificationCompat.BigPictureStyle bigPic =
-        new NotificationCompat.BigPictureStyle().bigPicture(
-            getBitmapFromURL(mUrl));
+//    NotificationCompat.BigPictureStyle bigPic =
+//        new NotificationCompat.BigPictureStyle().bigPicture(
+//                BitmapFactory.decodeResource(getResources(), R.drawable.network_available)).build();
+
+    builder.setStyle(bigPic);
 
     Notification notification = builder.build();
 
@@ -56,8 +62,7 @@ public class MaratNotifications {
 
   }
 
-  // turn the bitmap received into a url that is accepted in the big picture
-  // notification
+  // turn the bitmap received into a url that is accepted in the big picture notification
   public static Bitmap getBitmapFromURL(String src) {
     try {
       URL url = new URL(src);
