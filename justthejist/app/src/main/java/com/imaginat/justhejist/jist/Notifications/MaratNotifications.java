@@ -5,7 +5,6 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
@@ -38,8 +37,9 @@ public class MaratNotifications {
     bigPic.bigPicture(BitmapFactory.decodeResource(mActivity.getResources(), R.drawable.joe_biden_nyt)).build();
     NotificationCompat.Builder builder =
         new NotificationCompat.Builder(mActivity);
-    builder.setSmallIcon(android.R.drawable.ic_lock_idle_lock);
+    builder.setSmallIcon(R.drawable.nyt_icon);
     builder.setContentTitle("New Article: " + nameOfArticle);
+//    builder.setContentInfo("Check Out This New Interesting Story");
     builder.setContentText("Check Out This New Interesting Story");
 
     Intent notificationIntent = new Intent(mActivity, MainActivity.class);
