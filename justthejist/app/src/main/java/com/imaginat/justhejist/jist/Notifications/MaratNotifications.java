@@ -48,8 +48,7 @@ public class MaratNotifications {
             getBitmapFromURL(mUrl));
   }
 
-  // turn the bitmap received into a url that is accepted in the big picture
-  // notification
+  // turn the bitmap received into a url that is accepted in the big picture notification
   public static Bitmap getBitmapFromURL(String src) {
     try {
       URL url = new URL(src);
