@@ -29,16 +29,11 @@ import android.widget.Toast;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
 import com.imaginat.justhejist.jist.Notifications.MaratNotifications;
 import com.imaginat.justhejist.jist.R;
@@ -48,7 +43,6 @@ import com.imaginat.justhejist.jist.onDemandUpdate.NYTimesGetData;
 
 import org.json.JSONObject;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -126,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
 
     //------------------------FACEBOOK
     // BUTTONS---------------------------------------------
-    callbackManager = CallbackManager.Factory.create();
+   /* callbackManager = CallbackManager.Factory.create();
     LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
     loginButton.setReadPermissions("user_friends");
 
@@ -149,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements NYTimesGetData.NY
         });
     LoginManager.getInstance().logInWithReadPermissions(
         this, Arrays.asList("public_profile", "user_friends", "user_posts"));
-
+*/
     accessTokenTracker = new AccessTokenTracker() {
       @Override
       protected void onCurrentAccessTokenChanged(
