@@ -1,12 +1,16 @@
 package com.imaginat.justhejist.jist.onDemandUpdate;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.imaginat.justhejist.jist.DBHelper.TopStoryDBHelper;
 import com.imaginat.justhejist.jist.api.nyt.NYTApi;
 import com.imaginat.justhejist.jist.models.NewsStory;
+import com.imaginat.justhejist.jist.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +34,29 @@ public class NYTimesGetData extends AsyncTask<String, Void, List<NewsStory>> {
 
 
     try {
-      return NYTApi.getStories(section);
+      List<NewsStory> stories =  NYTApi.getStories(section);
+      // TODO(boloutaredoubeni): DB operation
+      for (NewsStory story : stories) {
+        ContentValues values = new ContentValues();
+        List<String> keywords = new ArrayList<>();
+        keywords.addAll(story.getKeywords());
+        String condensedKeywords = Utils.joinString(keywords);
+        values.put(TopStoryDBHelper.COL_SECTION, story.getSection());
+        values.put(TopStoryDBHelper.COL_SUBSECTION, "subsection");
+        values.put(TopStoryDBHelper.COL_ABSTRACT, story.getSummary());
+        values.put(TopStoryDBHelper.COL_BYLINE, story.getAuthor());
+        values.put(TopStoryDBHelper.COL_UPDATE, "update");
+        values.put(TopStoryDBHelper.COL_CREATED, "created");
+        values.put(TopStoryDBHelper.COL_TITLE, story.getTitle());
+        values.put(TopStoryDBHelper.COL_PUBLISHED, "published");
+        values.put(TopStoryDBHelper.COL_KEYWORDS, condensedKeywords);
+        values.put(TopStoryDBHelper.COL_MULTIMEDIA, "multimedia"); /* FIXME: put as JSON */
+        values.put(TopStoryDBHelper.COL_URL, story.getUrl());
+        TopStoryDBHelper
+            .getInstance(mNYTimesDataReceivedInterface.resolveContext())
+            .addArticle(values);
+      }
+      return stories;
     } catch (Exception ex) {
       ex.printStackTrace();
     }
