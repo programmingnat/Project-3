@@ -102,9 +102,11 @@ public class NewsArticleListAdapter
         imgUrl = image.getUrl();
       }
     }
+
+    final String picUrl = imgUrl;
     Picasso
         .with(mContext)
-        .load(imgUrl)
+        .load(picUrl)
         .error(R.drawable.ted_cruz2_nyt)
         .fit()
             //.centerInside()      // call .centerInside() or
@@ -116,7 +118,11 @@ public class NewsArticleListAdapter
 
         String url = newsStory.getUrl();
         Intent i = new Intent(mContext, StoryActivity.class);
+        // TODO(boloutaredoubeni): a temporary fix to build the object on the other side
         i.putExtra("URL", url);
+        i.putExtra("PIC_URL", picUrl);
+        i.putExtra("TITLE", newsStory.getTitle());
+        i.putExtra("AUTHOR", newsStory.getAuthor());
         mContext.startActivity(i);
       }
     });
