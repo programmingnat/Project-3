@@ -1,3 +1,5 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project Readme
-
-> Make sure to edit this file. You are required to provide a readme file describing what the app does, links to your Trello board, and any bugs that may exist!
+#Just the Jist
+<p>While at General Assembly, one of our assignments was created by The New York Times. The group I worked with developed an app that featured the NYT headlines and images using the Time's API. Additionally, we added some social media functions that allowed users to share and like stories on their Facebook page.</p>
+<img src="https://raw.githubusercontent.com/programmingnat/Project-3/master/Screenshot_20160612-163740.png"/>
+<img src="https://raw.githubusercontent.com/programmingnat/Project-3/master/Screenshot_20160612-163749.png"/>
+<img src="https://raw.githubusercontent.com/programmingnat/Project-3/master/Screenshot_20160612-163859.png"/>
